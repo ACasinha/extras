@@ -1,28 +1,32 @@
-export function calculateSalary(data, settings) {
+import { settings } from './settings.js'
+
+export function calculateSalary(data) {
   const hourlyRate =
-    (
-      data.baseSalary *
-      settings.formula.monthsPerYear
-    ) /
-    (
-      settings.formula.weeksPerYear *
-      settings.formula.weeklyHours
-    )
+    settings.manual.hourlyRateEnabled
+      ? settings.manual.hourlyRateValue
+      : (
+          data.baseSalary *
+          settings.formula.monthsPerYear
+        ) /
+        (
+          settings.formula.weeksPerYear *
+          settings.formula.weeklyHours
+        )
 
   const firstHourValue =
-    (
-      data.firstHour * hourlyRate
-    ) * settings.overtime.firstHourRate
+    data.firstHour *
+    hourlyRate *
+    settings.overtime.firstHourRate
 
   const remainingValue =
-    (
-      data.remainingHours * hourlyRate
-    ) * settings.overtime.remainingHoursRate
+    data.remainingHours *
+    hourlyRate *
+    settings.overtime.remainingHoursRate
 
   const holidayValue =
-    (
-      data.holidayHours * hourlyRate
-    ) * settings.overtime.holidayRate
+    data.holidayHours *
+    hourlyRate *
+    settings.overtime.holidayRate
 
   const grossExtraHours =
     firstHourValue +
@@ -36,44 +40,4 @@ export function calculateSalary(data, settings) {
     grossExtraHours * settings.salary.ssRate
 
   const netExtraHours =
-    grossExtraHours - extraIRS - extraSS
-
-  const adjustedSalary =
-    data.baseSalary * 0.8
-
-  const mealAllowance =
-    data.workDays *
-    settings.salary.mealAllowanceDaily
-
-  const salaryIRS =
-    adjustedSalary * settings.salary.irsRate
-
-  const salarySS =
-    adjustedSalary * settings.salary.ssRate
-
-  const adse =
-    adjustedSalary * settings.salary.adseRate
-
-  const club =
-    settings.salary.clubTax
-
-  const netSalary =
-    adjustedSalary +
-    mealAllowance -
-    salaryIRS -
-    salarySS -
-    adse -
-    club
-
-  const finalTotal =
-    netSalary + netExtraHours
-
-  return {
-    hourlyRate,
-    grossExtraHours,
-    netExtraHours,
-    netSalary,
-    finalTotal,
-
-    deductions: {
-}
+    grossExtraHours - extraIRS -
