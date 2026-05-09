@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hours-extra-v2'
+const CACHE_NAME = 'hours-extra-v1.0'
 
 const urlsToCache = [
   '/',
