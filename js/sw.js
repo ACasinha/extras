@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hours-extra-v1'
+const CACHE_NAME = 'hours-extra-v2'
 
 const urlsToCache = [
   '/',
@@ -6,6 +6,9 @@ const urlsToCache = [
   '/css/app.css',
   '/js/app.js',
   '/js/calculations.js',
+  '/js/settings.js',
+  '/js/settings-defaults.js',
+  
 ]
 
 self.addEventListener('install', (event) => {
