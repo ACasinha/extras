@@ -1117,13 +1117,19 @@ function calculate() {
   // Remuneração horária = (salBase * 12) / (52 * 28)
   const remHoraria = (salBase * 12) / (52 * 28);
 
+  // ── ORDENADO BASE ─────────────────────────────────
+  // Base ajustada = salBase * 0.8
+  const baseAjustada  = salBase * 0.8;
+  const subRefTotal   = subRef * dias;
+  const baseComSub    = baseAjustada + subRefTotal;
+
   const p1h   = cfg.p1h   / 100;
   const pRest = cfg.pRest / 100;
   const pDesc = cfg.pDesc / 100;
 
-  const val1hNormal  = h1N  * remHoraria * (1 + p1h);
-  const valRestNorm  = hNR  * remHoraria * (1 + pRest);
-  const valDescanso  = hDes * remHoraria * (1 + pDesc);
+  const val1hNormal  = h1N  * baseAjustada * (1 + p1h);
+  const valRestNorm  = hNR  * baseAjustada * (1 + pRest);
+  const valDescanso  = hDes * baseAjustada * (1 + pDesc);
 
   const totalHorasExtra = val1hNormal + valRestNorm + valDescanso;
   const totalHoras = h1N + hNR + hDes;
@@ -1133,12 +1139,6 @@ function calculate() {
   const ssHoras  = totalHorasExtra * (cfg.ssExtra  / 100);
   const totalDescHoras = irsHoras + ssHoras;
   const horasLiquidas  = totalHorasExtra - totalDescHoras;
-
-  // ── ORDENADO BASE ─────────────────────────────────
-  // Base ajustada = salBase * 0.8
-  const baseAjustada  = salBase * 0.8;
-  const subRefTotal   = subRef * dias;
-  const baseComSub    = baseAjustada + subRefTotal;
 
   // IRS Base (escalões AT) — sobre baseAjustada + 50% horas extra
   const baseIrsCalc = baseAjustada + totalHorasExtra * 0.5;
