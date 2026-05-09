@@ -1,0 +1,27 @@
+body {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 8rem;
+}
+
+article {
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+
+.sticky-result {
+  position: sticky;
+  bottom: 1rem;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
