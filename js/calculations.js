@@ -1,15 +1,28 @@
-export function calculateSalary(data) {
+export function calculateSalary(data, settings) {
   const hourlyRate =
-    (data.baseSalary * 12) / (52 * 28)
+    (
+      data.baseSalary *
+      settings.formula.monthsPerYear
+    ) /
+    (
+      settings.formula.weeksPerYear *
+      settings.formula.weeklyHours
+    )
 
   const firstHourValue =
-    (data.firstHour * hourlyRate) * 1.25
+    (
+      data.firstHour * hourlyRate
+    ) * settings.overtime.firstHourRate
 
   const remainingValue =
-    (data.remainingHours * hourlyRate) * 1.375
+    (
+      data.remainingHours * hourlyRate
+    ) * settings.overtime.remainingHoursRate
 
   const holidayValue =
-    (data.holidayHours * hourlyRate) * 1.5
+    (
+      data.holidayHours * hourlyRate
+    ) * settings.overtime.holidayRate
 
   const grossExtraHours =
     firstHourValue +
@@ -17,10 +30,10 @@ export function calculateSalary(data) {
     holidayValue
 
   const extraIRS =
-    grossExtraHours * data.irsRate
+    grossExtraHours * settings.salary.irsRate
 
   const extraSS =
-    grossExtraHours * 0.11
+    grossExtraHours * settings.salary.ssRate
 
   const netExtraHours =
     grossExtraHours - extraIRS - extraSS
@@ -29,18 +42,20 @@ export function calculateSalary(data) {
     data.baseSalary * 0.8
 
   const mealAllowance =
-    data.workDays * data.mealAllowanceDaily
+    data.workDays *
+    settings.salary.mealAllowanceDaily
 
   const salaryIRS =
-    adjustedSalary * data.irsRate
+    adjustedSalary * settings.salary.irsRate
 
   const salarySS =
-    adjustedSalary * 0.11
+    adjustedSalary * settings.salary.ssRate
 
   const adse =
-    adjustedSalary * 0.035
+    adjustedSalary * settings.salary.adseRate
 
-  const club = 1
+  const club =
+    settings.salary.clubTax
 
   const netSalary =
     adjustedSalary +
@@ -59,5 +74,6 @@ export function calculateSalary(data) {
     netExtraHours,
     netSalary,
     finalTotal,
-  }
+
+    deductions: {
 }
