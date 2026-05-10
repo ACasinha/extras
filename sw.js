@@ -1,10 +1,12 @@
 // Service Worker — HorasExtra CMRM
-const CACHE_NAME = 'horasextra-v1.2';
+const CACHE_NAME = 'horasextra-v1.3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  'https://cdn.jsdelivr.net/npm/beercss@3.9.7/dist/cdn/beer.min.css',
-  'https://cdn.jsdelivr.net/npm/beercss@3.9.7/dist/cdn/beer.min.js',
+  '/icons',
+  'https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.css',
+  'https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.js',
+  'https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.4/dist/cdn/material-dynamic-colors.min.js',
   'https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap',
   'https://fonts.googleapis.com/icon?family=Material+Icons'
 ];
