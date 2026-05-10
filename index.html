@@ -17,7 +17,7 @@
   <link href="https://cdn.jsdelivr.net/npm/beercss@3.9.7/dist/cdn/beer.min.css" rel="stylesheet" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.9.7/dist/cdn/beer.min.js"></script>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -41,7 +41,7 @@
     * { box-sizing: border-box; }
 
     body {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--surface-1);
       color: var(--text-primary);
       margin: 0;
@@ -49,76 +49,48 @@
       overflow-x: hidden;
     }
 
-    /* ─── TOP BAR ─────────────────────────────────────── */
-    .app-bar {
-      position: sticky;
-      top: 0;
+    /* ─── BOTTOM NAV ──────────────────────────────────── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(20, 24, 36, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(110,231,183,0.08);
+      background: rgba(20, 24, 36, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(110,231,183,0.1);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
-    .app-title {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .app-bar-actions { display: flex; gap: 4px; }
-    .icon-btn {
-      width: 40px; height: 40px;
-      border: none; border-radius: var(--radius-sm);
-      background: var(--surface-3);
-      color: var(--text-primary);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .icon-btn:active { transform: scale(0.92); }
-    .icon-btn:hover { background: var(--surface-4); }
-
-    /* ─── TABS ────────────────────────────────────────── */
-    .tabs {
-      display: flex;
-      background: var(--surface-2);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .tabs::-webkit-scrollbar { display: none; }
     .tab {
       flex: 1;
-      min-width: 80px;
-      padding: 12px 8px 10px;
+      padding: 10px 4px 10px;
       border: none;
       background: transparent;
       color: var(--text-muted);
-      font-family: 'Syne', sans-serif;
-      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       cursor: pointer;
-      border-bottom: 2px solid transparent;
       transition: all 0.2s;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      position: relative;
     }
-    .tab span.material-icons { font-size: 20px; }
-    .tab.active {
-      color: var(--brand);
-      border-bottom-color: var(--brand);
+    .tab span.material-icons { font-size: 22px; transition: transform 0.2s; }
+    .tab.active { color: var(--brand); }
+    .tab.active span.material-icons { transform: scale(1.1); }
+    .tab.active::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 20%; right: 20%;
+      height: 2px;
+      background: var(--brand);
+      border-radius: 0 0 3px 3px;
     }
+    .tab:active span.material-icons { transform: scale(0.9); }
 
     /* ─── PAGES ───────────────────────────────────────── */
-    .page { display: none; padding: 20px 16px 120px; animation: fadeIn 0.25s ease; }
+    .page { display: none; padding: 16px 16px 90px; animation: fadeIn 0.25s ease; }
     .page.active { display: block; }
     @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 
@@ -232,6 +204,15 @@
       box-shadow: 0 0 0 3px rgba(110,231,183,0.12);
     }
     .field-input.small { font-size: 14px; padding: 10px 12px; }
+    select.field-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a88a8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
 
     /* ─── HOURS ROW ───────────────────────────────────── */
     .hours-row {
@@ -380,7 +361,7 @@
     /* ─── FAB CALCULATE ───────────────────────────────── */
     .fab {
       position: fixed;
-      bottom: 80px;
+      bottom: 76px;
       right: 20px;
       z-index: 200;
       width: 56px; height: 56px;
@@ -402,7 +383,7 @@
     /* ─── TOAST ───────────────────────────────────────── */
     .toast {
       position: fixed;
-      bottom: 100px;
+      bottom: 82px;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
       background: var(--surface-4);
@@ -509,39 +490,6 @@
 <!-- Offline bar -->
 <div class="offline-bar" id="offlineBar">📡 Modo offline · Dados guardados localmente</div>
 
-<!-- Top bar -->
-<header class="app-bar">
-  <div class="app-title">⏱ HorasExtra</div>
-  <div class="app-bar-actions">
-    <button class="icon-btn" id="historyBtn" title="Histórico" onclick="showTab('historico')">
-      <span class="material-icons">history</span>
-    </button>
-    <button class="icon-btn" id="settingsBtn" title="Configurações" onclick="showTab('config')">
-      <span class="material-icons">settings</span>
-    </button>
-  </div>
-</header>
-
-<!-- Tabs -->
-<nav class="tabs">
-  <button class="tab active" data-tab="calc" onclick="showTab('calc')">
-    <span class="material-icons">calculate</span>
-    Calcular
-  </button>
-  <button class="tab" data-tab="resultado" onclick="showTab('resultado')">
-    <span class="material-icons">receipt_long</span>
-    Resumo
-  </button>
-  <button class="tab" data-tab="historico" onclick="showTab('historico')">
-    <span class="material-icons">history</span>
-    Histórico
-  </button>
-  <button class="tab" data-tab="config" onclick="showTab('config')">
-    <span class="material-icons">tune</span>
-    Config
-  </button>
-</nav>
-
 <!-- ═══════════════════ CALC PAGE ═══════════════════ -->
 <section class="page active" id="page-calc">
 
@@ -555,6 +503,7 @@
       <label class="field-label">Remuneração Base Mensal Normal (€)</label>
       <input type="number" class="field-input" id="salarioBase" value="1762.30" step="0.01"
              inputmode="decimal" onchange="autoCalc()" />
+      <div id="reducaoIndicator" style="margin-top:6px; font-size:12px; color:var(--text-muted);"></div>
     </div>
     <div class="field-group">
       <label class="field-label">Subsidio de Refeição (diário) (€)</label>
@@ -873,7 +822,7 @@
         width: 100%; padding: 14px;
         background: linear-gradient(135deg, var(--brand), var(--brand-dim));
         border: none; border-radius: var(--radius-md);
-        color: #0f1420; font-family: 'Syne', sans-serif;
+        color: #0f1420; font-family: 'Inter', sans-serif;
         font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
         cursor: pointer; transition: opacity 0.2s;
       " onmousedown="this.style.opacity=0.8" onmouseup="this.style.opacity=1">
@@ -901,44 +850,81 @@
   <div class="section-title">Configurações</div>
   <div class="section-sub">Taxas fiscais e parâmetros</div>
 
-  <!-- IRS & SS -->
+  <!-- Tabela IRS AT -->
   <div class="card">
     <div class="card-header">
-      <span class="card-title">Fiscalidade — Horas Extra</span>
-      <div class="card-icon red"><span class="material-icons">account_balance</span></div>
+      <span class="card-title">Tabela de Retenção na Fonte (IRS)</span>
+      <div class="card-icon amber"><span class="material-icons">account_balance</span></div>
+    </div>
+    <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px; padding:10px 12px; background:rgba(110,231,183,0.05); border-radius:var(--radius-sm); border:1px solid rgba(110,231,183,0.12); line-height:1.6;">
+      ℹ️ Tabelas AT 2026 — Continente. IRS calculado pela fórmula oficial.<br>Horas extra: <strong style="color:var(--text-primary)">50% da taxa efetiva</strong> do ordenado. SS: taxa normal em ambos.
     </div>
     <div class="field-group">
-      <label class="field-label">Taxa IRS — Horas Extra (%)</label>
-      <input type="number" class="field-input small" id="cfgIrsExtra" value="11.62"
-             step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+      <label class="field-label">Tabela aplicável</label>
+      <select class="field-input small" id="cfgIrsTabela" onchange="saveConfig(); updateTabelaPreview()">
+        <option value="T1">I — Não casado s/ dep. / Casado 2 titulares</option>
+        <option value="T2">II — Não casado c/ dependentes</option>
+        <option value="T3">III — Casado, único titular</option>
+        <option value="T4">IV — Não casado / Casado 2 tit. s/ dep. — Deficiência</option>
+        <option value="T5">V — Não casado c/ dep. — Deficiência</option>
+        <option value="T6">VI — Casado 2 tit. c/ dep. — Deficiência</option>
+        <option value="T7">VII — Casado único titular — Deficiência</option>
+      </select>
     </div>
-    <div class="field-group">
-      <label class="field-label">Taxa Seg. Social — Horas Extra (%)</label>
-      <input type="number" class="field-input small" id="cfgSsExtra" value="11.00"
-             step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+    <div class="field-group" id="fieldDependentes">
+      <label class="field-label">Nº de Dependentes</label>
+      <div class="stepper">
+        <button onclick="stepperChange('cfgDependentes', -1)">−</button>
+        <input type="number" id="cfgDependentes" value="0" min="0" max="10"
+               inputmode="numeric" onchange="saveConfig()" />
+        <button onclick="stepperChange('cfgDependentes', 1)">+</button>
+      </div>
     </div>
+    <div id="tabelaPreview" style="margin-top:4px; padding:10px 12px; background:var(--surface-3); border-radius:var(--radius-sm); font-size:12px; color:var(--text-muted); line-height:1.8;"></div>
   </div>
 
-  <!-- Ordenado Base -->
+  <!-- SS e ADSE -->
   <div class="card">
     <div class="card-header">
-      <span class="card-title">Fiscalidade — Ordenado Base</span>
+      <span class="card-title">Segurança Social e ADSE</span>
       <div class="card-icon amber"><span class="material-icons">percent</span></div>
     </div>
     <div class="field-group">
-      <label class="field-label">Taxa IRS — Ordenado Base (%)</label>
-      <input type="number" class="field-input small" id="cfgIrsBase" value="11.62"
-             step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-    <div class="field-group">
-      <label class="field-label">Taxa Seg. Social — Ordenado Base (%)</label>
+      <label class="field-label">Taxa Seg. Social (%)</label>
       <input type="number" class="field-input small" id="cfgSsBase" value="11.00"
              step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+      <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Aplicada ao ordenado base e às horas extra</div>
     </div>
     <div class="field-group">
       <label class="field-label">Taxa ADSE (%)</label>
       <input type="number" class="field-input small" id="cfgAdse" value="3.50"
              step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+    </div>
+  </div>
+
+  <!-- Redução Vencimento Base -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Redução do Vencimento Base</span>
+      <div class="card-icon red"><span class="material-icons">trending_down</span></div>
+    </div>
+    <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px; padding:10px 12px; background:rgba(248,113,113,0.05); border-radius:var(--radius-sm); border:1px solid rgba(248,113,113,0.12); line-height:1.6;">
+      ⚠️ Quando ativa, a remuneração horária (base de cálculo das horas extra) é calculada sobre o vencimento <strong style="color:var(--text-primary)">após redução</strong>.
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <div class="t-name">Aplicar Redução</div>
+        <div class="t-sub">Afeta a remuneração horária</div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="cfgReducaoActive" checked onchange="saveConfig()" />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="field-group" style="margin-top:14px;">
+      <label class="field-label">Percentagem de Redução (%)</label>
+      <input type="number" class="field-input small" id="cfgReducaoPct" value="20"
+             step="0.5" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
     </div>
   </div>
 
@@ -998,24 +984,6 @@
     </div>
   </div>
 
-  <!-- Fórmula IRS (informação) -->
-  <div class="card" style="border-color: rgba(245,158,11,0.15); background: rgba(245,158,11,0.04);">
-    <div class="card-header">
-      <span class="card-title">IRS Base — Escalões AT</span>
-      <div class="card-icon amber"><span class="material-icons">info</span></div>
-    </div>
-    <div style="font-size:12px; color:var(--text-muted); line-height:1.7;">
-      O IRS sobre o ordenado base é calculado com a tabela de escalões AT em vigor:<br><br>
-      • ≤ 870€ → 0%<br>
-      • ≤ 1000€ → 16.5% − 143.55<br>
-      • ≤ 1500€ → 25% − 188.90<br>
-      • ≤ 2000€ → 28% − 233.90<br>
-      • ≤ 2500€ → 35% − 333.90<br>
-      • &gt; 2500€ → 37%<br><br>
-      <em>Aplicado sobre: Base Ajustada + 50% das Horas Extra</em>
-    </div>
-  </div>
-
   <!-- Cloud sync (placeholder) -->
   <div class="card" style="opacity:0.6;">
     <div class="card-header">
@@ -1048,6 +1016,26 @@
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <button class="tab active" data-tab="calc" onclick="showTab('calc')">
+    <span class="material-icons">calculate</span>
+    Calcular
+  </button>
+  <button class="tab" data-tab="resultado" onclick="showTab('resultado')">
+    <span class="material-icons">receipt_long</span>
+    Resumo
+  </button>
+  <button class="tab" data-tab="historico" onclick="showTab('historico')">
+    <span class="material-icons">history</span>
+    Histórico
+  </button>
+  <button class="tab" data-tab="config" onclick="showTab('config')">
+    <span class="material-icons">tune</span>
+    Config
+  </button>
+</nav>
+
 <script>
 // ═══════════════════════════════════════════════════
 //  STATE & STORAGE
@@ -1056,10 +1044,11 @@ let currentResult = null;
 
 function loadConfig() {
   const defaults = {
-    irsExtra: 11.62, ssExtra: 11.00,
-    irsBase: 11.62, ssBase: 11.00, adse: 3.50,
+    irsTabela: 'T1', irsDependentes: 0,
+    ssBase: 11.00, adse: 3.50,
     p1h: 25, pRest: 37.5, pDesc: 50,
-    adseActive: true, camaraActive: true, camaraVal: 1.00
+    adseActive: true, camaraActive: true, camaraVal: 1.00,
+    reducaoActive: true, reducaoPct: 20
   };
   try {
     return Object.assign(defaults, JSON.parse(localStorage.getItem('heConfig') || '{}'));
@@ -1068,17 +1057,18 @@ function loadConfig() {
 
 function saveConfig() {
   const cfg = {
-    irsExtra:    parseFloat(document.getElementById('cfgIrsExtra').value) || 0,
-    ssExtra:     parseFloat(document.getElementById('cfgSsExtra').value) || 0,
-    irsBase:     parseFloat(document.getElementById('cfgIrsBase').value) || 0,
-    ssBase:      parseFloat(document.getElementById('cfgSsBase').value) || 0,
-    adse:        parseFloat(document.getElementById('cfgAdse').value) || 0,
-    p1h:         parseFloat(document.getElementById('cfgP1h').value) || 25,
-    pRest:       parseFloat(document.getElementById('cfgPRest').value) || 37.5,
-    pDesc:       parseFloat(document.getElementById('cfgPDesc').value) || 50,
-    adseActive:  document.getElementById('cfgAdseActive').checked,
-    camaraActive:document.getElementById('cfgCamaraActive').checked,
-    camaraVal:   parseFloat(document.getElementById('cfgCamaraVal').value) || 0
+    irsTabela:     document.getElementById('cfgIrsTabela').value,
+    irsDependentes:parseInt(document.getElementById('cfgDependentes').value) || 0,
+    ssBase:        parseFloat(document.getElementById('cfgSsBase').value) || 0,
+    adse:          parseFloat(document.getElementById('cfgAdse').value) || 0,
+    p1h:           parseFloat(document.getElementById('cfgP1h').value) || 25,
+    pRest:         parseFloat(document.getElementById('cfgPRest').value) || 37.5,
+    pDesc:         parseFloat(document.getElementById('cfgPDesc').value) || 50,
+    adseActive:    document.getElementById('cfgAdseActive').checked,
+    camaraActive:  document.getElementById('cfgCamaraActive').checked,
+    camaraVal:     parseFloat(document.getElementById('cfgCamaraVal').value) || 0,
+    reducaoActive: document.getElementById('cfgReducaoActive').checked,
+    reducaoPct:    parseFloat(document.getElementById('cfgReducaoPct').value) || 0
   };
   localStorage.setItem('heConfig', JSON.stringify(cfg));
   autoCalc();
@@ -1086,17 +1076,19 @@ function saveConfig() {
 }
 
 function applyConfig(cfg) {
-  document.getElementById('cfgIrsExtra').value  = cfg.irsExtra;
-  document.getElementById('cfgSsExtra').value   = cfg.ssExtra;
-  document.getElementById('cfgIrsBase').value   = cfg.irsBase;
-  document.getElementById('cfgSsBase').value    = cfg.ssBase;
-  document.getElementById('cfgAdse').value      = cfg.adse;
-  document.getElementById('cfgP1h').value       = cfg.p1h;
-  document.getElementById('cfgPRest').value     = cfg.pRest;
-  document.getElementById('cfgPDesc').value     = cfg.pDesc;
-  document.getElementById('cfgAdseActive').checked  = cfg.adseActive;
-  document.getElementById('cfgCamaraActive').checked= cfg.camaraActive;
-  document.getElementById('cfgCamaraVal').value     = cfg.camaraVal;
+  document.getElementById('cfgIrsTabela').value        = cfg.irsTabela;
+  document.getElementById('cfgDependentes').value      = cfg.irsDependentes;
+  document.getElementById('cfgSsBase').value           = cfg.ssBase;
+  document.getElementById('cfgAdse').value             = cfg.adse;
+  document.getElementById('cfgP1h').value              = cfg.p1h;
+  document.getElementById('cfgPRest').value            = cfg.pRest;
+  document.getElementById('cfgPDesc').value            = cfg.pDesc;
+  document.getElementById('cfgAdseActive').checked     = cfg.adseActive;
+  document.getElementById('cfgCamaraActive').checked   = cfg.camaraActive;
+  document.getElementById('cfgCamaraVal').value        = cfg.camaraVal;
+  document.getElementById('cfgReducaoActive').checked  = cfg.reducaoActive;
+  document.getElementById('cfgReducaoPct').value       = cfg.reducaoPct;
+  updateTabelaPreview();
 }
 
 // ═══════════════════════════════════════════════════
@@ -1113,19 +1105,16 @@ function calculate() {
   const hNR       = parseFloat(document.getElementById('hNormalRest').value) || 0;
   const hDes      = parseFloat(document.getElementById('hDescanso').value) || 0;
 
-  // ── ORDENADO BASE ─────────────────────────────────
-  // Base ajustada = salBase * 0.8
-  const baseAjustada  = salBase * 0.8;
-  const subRefTotal   = subRef * dias;
-  const baseComSub    = baseAjustada + subRefTotal;
+  // ── HORAS EXTRA ──────────────────────────────────
+  // Salário base com eventual redução (para cálculo da remuneração horária)
+  const reducaoPct    = cfg.reducaoActive ? (cfg.reducaoPct / 100) : 0;
+  const salBaseReduzido = salBase * (1 - reducaoPct);
+  // Remuneração horária = (salBaseReduzido * 12) / (52 * 28)
+  const remHoraria = (salBaseReduzido * 12) / (52 * 28);
 
   const p1h   = cfg.p1h   / 100;
   const pRest = cfg.pRest / 100;
   const pDesc = cfg.pDesc / 100;
-
-    // ── HORAS EXTRA ──────────────────────────────────
-  // Remuneração horária = (baseAjustada * 12) / (52 * 28)
-  const remHoraria = (baseAjustada * 12) / (52 * 28); 
 
   const val1hNormal  = h1N  * remHoraria * (1 + p1h);
   const valRestNorm  = hNR  * remHoraria * (1 + pRest);
@@ -1134,22 +1123,28 @@ function calculate() {
   const totalHorasExtra = val1hNormal + valRestNorm + valDescanso;
   const totalHoras = h1N + hNR + hDes;
 
-  // Descontos sobre horas extra
-  const irsHoras = totalHorasExtra * (cfg.irsExtra / 100);
-  const ssHoras  = totalHorasExtra * (cfg.ssExtra  / 100);
-  const totalDescHoras = irsHoras + ssHoras;
-  const horasLiquidas  = totalHorasExtra - totalDescHoras;
+  // ── ORDENADO BASE ─────────────────────────────────
+  // Base ajustada = salBase * (1 - reducao%)
+  const baseAjustada  = salBase * (1 - reducaoPct);
+  const subRefTotal   = subRef * dias;
+  const baseComSub    = baseAjustada + subRefTotal;
 
-  // IRS Base (escalões AT) — sobre baseAjustada + 50% horas extra
-  const baseIrsCalc = baseAjustada + totalHorasExtra * 0.5;
-  const irsBase = calcIrsEscaloes(baseIrsCalc);
+  // IRS Base — tabela AT oficial sobre baseAjustada (+ 50% horas extra como base de cálculo AT)
+  const baseIrsRef = baseAjustada + totalHorasExtra * 0.5;
+  const { irsEuros: irsBaseEuros, taxaEfetiva: irsBaseTaxa } =
+    calcIrsAT(cfg.irsTabela, baseIrsRef, cfg.irsDependentes);
+
+  // IRS Horas Extra = 50% da taxa efetiva do ordenado base × valor horas extra
+  const irsHorasTaxa  = irsBaseTaxa * 0.5;
+  const irsHoras      = totalHorasExtra * irsHorasTaxa;
 
   const ssBase   = baseAjustada * (cfg.ssBase / 100);
+  const ssHoras  = totalHorasExtra * (cfg.ssBase / 100);
   const adseVal  = baseAjustada * (cfg.adse  / 100);
   const camaraVal= cfg.camaraActive ? cfg.camaraVal : 0;
 
-  const totalDescBase = irsBase + ssBase + (cfg.adseActive ? adseVal : 0) + camaraVal;
-  const baseLiquida   = baseComSub - totalDescBase;  // J9 - L9 = N9
+  const totalDescBase = irsBaseEuros + ssBase + (cfg.adseActive ? adseVal : 0) + camaraVal;
+  const baseLiquida   = baseComSub - totalDescBase;
 
   // ── TOTAIS ────────────────────────────────────────
   const totalDescontos = totalDescHoras + totalDescBase;
@@ -1157,13 +1152,13 @@ function calculate() {
   const salarioLiquido = horasLiquidas + baseLiquida;  // M11
 
   const res = {
-    remHoraria, salBase, subRef, dias,
+    remHoraria, salBase, salBaseReduzido, reducaoPct, subRef, dias,
     h1N, hNR, hDes, totalHoras,
     val1hNormal, valRestNorm, valDescanso,
-    totalHorasExtra, irsHoras, ssHoras,
+    totalHorasExtra, irsHoras, irsHorasTaxa, ssHoras,
     totalDescHoras, horasLiquidas,
-    baseAjustada, subRefTotal, baseComSub,
-    irsBase, ssBase,
+    baseAjustada, subRefTotal, baseComSub, baseIrsRef,
+    irsBase: irsBaseEuros, irsBaseTaxa, ssBase,
     adseVal: cfg.adseActive ? adseVal : 0,
     camaraVal,
     totalDescBase,
@@ -1180,25 +1175,152 @@ function calculate() {
   return res;
 }
 
-function calcIrsEscaloes(base) {
-  if (base <= 870)  return 0;
-  if (base <= 1000) return base * 0.165 - 143.55;
-  if (base <= 1500) return base * 0.25  - 188.90;
-  if (base <= 2000) return base * 0.28  - 233.90;
-  if (base <= 2500) return base * 0.35  - 333.90;
-  return base * 0.37;
+// ═══════════════════════════════════════════════════
+//  TABELAS IRS AT 2026 — CONTINENTE
+//  Fórmula: R × taxa − parcela_abater − (parcela_dep × n_deps)
+//  Linhas especiais (fórmula variável): parcela = ta × fa × (th − R)
+// ═══════════════════════════════════════════════════
+const IRS_TABELAS = {
+  T1: { label:'I', desc:'Não casado s/ dep. / Casado 2 titulares', parcela_dep:21.43, escaloes:[
+    {lim:920,    taxa:0,      p:0,       fe:null},
+    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
+    {lim:1108,   taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
+    {lim:1154,   taxa:0.157,  p:94.71,   fe:null},
+    {lim:1212,   taxa:0.212,  p:158.18,  fe:null},
+    {lim:1819,   taxa:0.241,  p:193.33,  fe:null},
+    {lim:2119,   taxa:0.311,  p:320.66,  fe:null},
+    {lim:2499,   taxa:0.349,  p:401.19,  fe:null},
+    {lim:3305,   taxa:0.3836, p:487.66,  fe:null},
+    {lim:5547,   taxa:0.3969, p:531.62,  fe:null},
+    {lim:20221,  taxa:0.4495, p:823.40,  fe:null},
+    {lim:Infinity,taxa:0.4717,p:1272.31, fe:null},
+  ]},
+  T2: { label:'II', desc:'Não casado c/ dependentes', parcela_dep:34.29, escaloes:[
+    {lim:920,    taxa:0,      p:0,       fe:null},
+    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
+    {lim:1108,   taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
+    {lim:1154,   taxa:0.157,  p:94.71,   fe:null},
+    {lim:1212,   taxa:0.212,  p:158.18,  fe:null},
+    {lim:1819,   taxa:0.241,  p:193.33,  fe:null},
+    {lim:2119,   taxa:0.311,  p:320.66,  fe:null},
+    {lim:2499,   taxa:0.349,  p:401.19,  fe:null},
+    {lim:3305,   taxa:0.3836, p:487.66,  fe:null},
+    {lim:5547,   taxa:0.3969, p:531.62,  fe:null},
+    {lim:20221,  taxa:0.4495, p:823.40,  fe:null},
+    {lim:Infinity,taxa:0.4717,p:1272.31, fe:null},
+  ]},
+  T3: { label:'III', desc:'Casado, único titular', parcela_dep:42.86, escaloes:[
+    {lim:991,    taxa:0,      p:0,       fe:null},
+    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1372.15]},
+    {lim:1108,   taxa:0.125,  p:null,    fe:[0.125,1.35,1677.85]},
+    {lim:1119,   taxa:0.125,  p:96.17,   fe:null},
+    {lim:1432,   taxa:0.1272, p:98.64,   fe:null},
+    {lim:1962,   taxa:0.157,  p:141.32,  fe:null},
+    {lim:2240,   taxa:0.1938, p:213.53,  fe:null},
+    {lim:2773,   taxa:0.2277, p:289.47,  fe:null},
+    {lim:3389,   taxa:0.257,  p:370.72,  fe:null},
+    {lim:5965,   taxa:0.2881, p:476.12,  fe:null},
+    {lim:20265,  taxa:0.3843, p:1049.96, fe:null},
+    {lim:Infinity,taxa:0.4717,p:2821.13, fe:null},
+  ]},
+  T4: { label:'IV', desc:'Não casado/Casado 2 tit. s/ dep. — Deficiência', parcela_dep:0, escaloes:[
+    {lim:1694,   taxa:0,      p:0,       fe:null},
+    {lim:2063,   taxa:0.212,  p:359.13,  fe:null},
+    {lim:2492,   taxa:0.311,  p:563.37,  fe:null},
+    {lim:4487,   taxa:0.349,  p:658.07,  fe:null},
+    {lim:4753,   taxa:0.3836, p:813.33,  fe:null},
+    {lim:6687,   taxa:0.3969, p:876.55,  fe:null},
+    {lim:20468,  taxa:0.4495, p:1228.29, fe:null},
+    {lim:Infinity,taxa:0.4717,p:1682.68, fe:null},
+  ]},
+  T5: { label:'V', desc:'Não casado c/ dep. — Deficiência', parcela_dep:42.86, escaloes:[
+    {lim:1938,   taxa:0,      p:0,       fe:null},
+    {lim:2063,   taxa:0.2132, p:413.19,  fe:null},
+    {lim:2854,   taxa:0.311,  p:614.96,  fe:null},
+    {lim:4504,   taxa:0.349,  p:723.42,  fe:null},
+    {lim:6826,   taxa:0.3836, p:879.26,  fe:null},
+    {lim:7048,   taxa:0.3969, p:970.05,  fe:null},
+    {lim:20468,  taxa:0.4495, p:1340.78, fe:null},
+    {lim:Infinity,taxa:0.4717,p:1795.17, fe:null},
+  ]},
+  T6: { label:'VI', desc:'Casado 2 tit. c/ dep. — Deficiência', parcela_dep:21.43, escaloes:[
+    {lim:1668,   taxa:0,      p:0,       fe:null},
+    {lim:2068,   taxa:0.2049, p:341.78,  fe:null},
+    {lim:2497,   taxa:0.241,  p:416.44,  fe:null},
+    {lim:3107,   taxa:0.311,  p:591.23,  fe:null},
+    {lim:4504,   taxa:0.349,  p:709.30,  fe:null},
+    {lim:6826,   taxa:0.3836, p:865.14,  fe:null},
+    {lim:7048,   taxa:0.3969, p:955.93,  fe:null},
+    {lim:20468,  taxa:0.4495, p:1326.66, fe:null},
+    {lim:Infinity,taxa:0.4717,p:1781.05, fe:null},
+  ]},
+  T7: { label:'VII', desc:'Casado único titular — Deficiência', parcela_dep:42.86, escaloes:[
+    {lim:2325,   taxa:0,      p:0,       fe:null},
+    {lim:3494,   taxa:0.2277, p:529.41,  fe:null},
+    {lim:3761,   taxa:0.257,  p:631.79,  fe:null},
+    {lim:6687,   taxa:0.2881, p:748.76,  fe:null},
+    {lim:20468,  taxa:0.4244, p:1660.20, fe:null},
+    {lim:Infinity,taxa:0.4717,p:2628.34, fe:null},
+  ]},
+};
+
+// Returns { irsEuros, taxaEfetiva }
+function calcIrsAT(tabelaKey, R, nDeps) {
+  const t = IRS_TABELAS[tabelaKey] || IRS_TABELAS['T1'];
+  for (const e of t.escaloes) {
+    if (R <= e.lim) {
+      if (e.taxa === 0) return { irsEuros: 0, taxaEfetiva: 0 };
+      const parcela = e.fe
+        ? e.fe[0] * e.fe[1] * (e.fe[2] - R)
+        : e.p;
+      const euros = Math.max(0, R * e.taxa - parcela - (t.parcela_dep * nDeps));
+      return { irsEuros: euros, taxaEfetiva: R > 0 ? euros / R : 0 };
+    }
+  }
+  return { irsEuros: 0, taxaEfetiva: 0 };
+}
+
+function updateTabelaPreview() {
+  const sel = document.getElementById('cfgIrsTabela');
+  if (!sel) return;
+  const t = IRS_TABELAS[sel.value];
+  if (!t) return;
+  const deps = parseInt(document.getElementById('cfgDependentes').value) || 0;
+  const hasDeps = ['T1','T2','T3','T5','T6','T7'].includes(sel.value);
+  document.getElementById('fieldDependentes').style.display = hasDeps ? '' : 'none';
+  // Generate escalao table preview
+  const rows = t.escaloes.map(e => {
+    if (e.taxa === 0) return `<div>≤ ${e.lim === Infinity ? '∞' : e.lim.toLocaleString('pt-PT')}€ → <strong>0%</strong></div>`;
+    const limLabel = e.lim === Infinity ? '> anterior' : `≤ ${e.lim.toLocaleString('pt-PT')}€`;
+    return `<div>${limLabel} → <strong style="color:var(--text-primary)">${(e.taxa*100).toFixed(4).replace(/\.?0+$/,'')}%</strong></div>`;
+  });
+  const sample = [1000, 1500, 2000, 3000].map(r => {
+    const res = calcIrsAT(sel.value, r, deps);
+    return `${r.toLocaleString('pt-PT')}€ → ${(res.taxaEfetiva*100).toFixed(2)}%`;
+  }).join(' · ');
+  document.getElementById('tabelaPreview').innerHTML =
+    `<div style="margin-bottom:6px; color:var(--text-primary); font-weight:600;">Tabela ${t.label} · ${t.desc}</div>` +
+    rows.slice(0,6).join('') +
+    `<div style="margin-top:6px; color:var(--brand); font-size:11px;">Exemplos (${deps} dep.): ${sample}</div>`;
 }
 
 function autoCalc() {
   const res = calculate();
   // Update quick preview
-  document.getElementById('prevBruto').textContent   = fmt(res.salarioBruto);
-  document.getElementById('prevLiquido').textContent = fmt(res.salarioLiquido);
-  document.getElementById('prevHorasVal').textContent= fmt(res.totalHorasExtra);
+  document.getElementById('prevBruto').textContent    = fmt(res.salarioBruto);
+  document.getElementById('prevLiquido').textContent  = fmt(res.salarioLiquido);
+  document.getElementById('prevHorasVal').textContent = fmt(res.totalHorasExtra);
   document.getElementById('prevDescontos').textContent= fmt(res.totalDescontos);
   // Update hours chip
   document.getElementById('totalHorasChip').innerHTML =
     `<span class="chip green">⏱ ${res.totalHoras} horas extra</span>`;
+  // Update reduction indicator
+  const ind = document.getElementById('reducaoIndicator');
+  if (res.reducaoPct > 0) {
+    ind.innerHTML = `<span style="color:var(--danger);">↓ Redução ${(res.reducaoPct*100).toFixed(1)}% aplicada</span> · Base cálculo: <span style="font-family:'DM Mono',monospace;">${fmt(res.salBaseReduzido)}</span> · Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+  } else {
+    ind.innerHTML = `Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+  }
 }
 
 function renderResult(r) {
@@ -1226,15 +1348,20 @@ function renderResult(r) {
   // Ordenado base breakdown
   document.getElementById('bkBaseNormVal').textContent = fmt(r.salBase);
   document.getElementById('bkBaseAjVal').textContent   = fmt(r.baseAjustada);
-  document.getElementById('bkBaseAjDesc').textContent  = `${fmt(r.salBase)} × 80%`;
+  document.getElementById('bkBaseAjDesc').textContent  = r.reducaoPct > 0
+    ? `${fmt(r.salBase)} × ${(100 - r.reducaoPct*100).toFixed(1)}% (redução ${(r.reducaoPct*100).toFixed(1)}%)`
+    : `Sem redução aplicada`;
   document.getElementById('bkSubRefDesc').textContent  = `${r.dias} dias × ${fmt(r.subRef)}`;
   document.getElementById('bkSubRefVal').textContent   = fmt(r.subRefTotal);
   document.getElementById('bkBaseLiq').textContent     = fmt(r.baseLiquida);
 
   // Descontos
-  document.getElementById('bkIrsHDesc').textContent  = `${r.cfg.irsExtra}% sobre horas`;
-  document.getElementById('bkSsHDesc').textContent   = `${r.cfg.ssExtra}% sobre horas`;
-  document.getElementById('bkIrsBDesc').textContent  = `Escalões AT`;
+  const tabelaInfo = IRS_TABELAS[r.cfg.irsTabela] || IRS_TABELAS['T1'];
+  document.getElementById('bkIrsHDesc').textContent  =
+    `Tab.${tabelaInfo.label} · ${(r.irsHorasTaxa*100).toFixed(2)}% (50% × ${(r.irsBaseTaxa*100).toFixed(2)}%)`;
+  document.getElementById('bkSsHDesc').textContent   = `${r.cfg.ssBase}% (taxa normal)`;
+  document.getElementById('bkIrsBDesc').textContent  =
+    `Tab.${tabelaInfo.label} · ${(r.irsBaseTaxa*100).toFixed(2)}% efetivo`;
   document.getElementById('bkSsBDesc').textContent   = `${r.cfg.ssBase}% sobre base aj.`;
   document.getElementById('bkAdseDesc').textContent  = `${r.cfg.adse}% sobre base aj.`;
   document.getElementById('bkIrsHVal').textContent   = '−' + fmt(r.irsHoras);
@@ -1323,7 +1450,7 @@ function showHistoryDetail(id) {
       margin-top:16px; width:100%; padding:12px;
       background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2);
       border-radius: var(--radius-md); color: var(--danger);
-      font-family: 'Syne',sans-serif; font-size:13px; font-weight:700;
+      font-family: 'Inter',sans-serif; font-size:13px; font-weight:700;
       cursor:pointer;">
       🗑 Eliminar registo
     </button>
