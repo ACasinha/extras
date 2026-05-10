@@ -1,10 +1,11 @@
 {
-  "name": "Horas Extra CMRM",
+  "name": "Horas Extra",
   "short_name": "HorasExtra",
   "description": "Calculadora de Horas Extra com IRS, Segurança Social e ADSE",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "background_color": "#141824",
   "theme_color": "#141824",
   "lang": "pt-PT",
