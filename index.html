@@ -1113,10 +1113,6 @@ function calculate() {
   const hNR       = parseFloat(document.getElementById('hNormalRest').value) || 0;
   const hDes      = parseFloat(document.getElementById('hDescanso').value) || 0;
 
-  // ── HORAS EXTRA ──────────────────────────────────
-  // Remuneração horária = (salBase * 12) / (52 * 28)
-  const remHoraria = (salBase * 12) / (52 * 28);
-
   // ── ORDENADO BASE ─────────────────────────────────
   // Base ajustada = salBase * 0.8
   const baseAjustada  = salBase * 0.8;
@@ -1127,9 +1123,13 @@ function calculate() {
   const pRest = cfg.pRest / 100;
   const pDesc = cfg.pDesc / 100;
 
-  const val1hNormal  = h1N  * baseAjustada * (1 + p1h);
-  const valRestNorm  = hNR  * baseAjustada * (1 + pRest);
-  const valDescanso  = hDes * baseAjustada * (1 + pDesc);
+    // ── HORAS EXTRA ──────────────────────────────────
+  // Remuneração horária = (baseAjustada * 12) / (52 * 28)
+  const remHoraria = (baseAjustada * 12) / (52 * 28); 
+
+  const val1hNormal  = h1N  * remHoraria * (1 + p1h);
+  const valRestNorm  = hNR  * remHoraria * (1 + pRest);
+  const valDescanso  = hDes * remHoraria * (1 + pDesc);
 
   const totalHorasExtra = val1hNormal + valRestNorm + valDescanso;
   const totalHoras = h1N + hNR + hDes;
