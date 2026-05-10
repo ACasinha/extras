@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#1a1f2e" />
   <meta name="description" content="Calculadora de Horas Extra CMRM" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="HorasExtra" />
@@ -1138,13 +1139,20 @@ function calculate() {
   const irsHorasTaxa  = irsBaseTaxa * 0.5;
   const irsHoras      = totalHorasExtra * irsHorasTaxa;
 
-  const ssBase   = baseAjustada * (cfg.ssBase / 100);
   const ssHoras  = totalHorasExtra * (cfg.ssBase / 100);
+
+  // Descontos sobre horas extra
+  const totalDescHoras = irsHoras + ssHoras;
+
+  // Valor líquido das horas extra
+  const horasLiquidas = totalHorasExtra - totalDescHoras;
+
+  const ssBase   = baseAjustada * (cfg.ssBase / 100);
   const adseVal  = baseAjustada * (cfg.adse  / 100);
   const camaraVal= cfg.camaraActive ? cfg.camaraVal : 0;
 
   const totalDescBase = irsBaseEuros + ssBase + (cfg.adseActive ? adseVal : 0) + camaraVal;
-  const baseLiquida   = baseComSub - totalDescBase;
+  const baseLiquida   = baseAjustada - totalDescBase + subRefTotal;
 
   // ── TOTAIS ────────────────────────────────────────
   const totalDescontos = totalDescHoras + totalDescBase;
@@ -1444,7 +1452,7 @@ function showHistoryDetail(id) {
     </div>
     <div style="font-size:12px; color:var(--text-muted);">
       ${h.h1N}h 1ª normal + ${h.hNR}h restantes + ${h.hDes}h descanso<br>
-      Base: ${fmt(h.salBase)} · IRS: ${h.cfg?.irsExtra}% · SS: ${h.cfg?.ssExtra}%
+      Base: ${fmt(h.salBase)} · SS: ${h.cfg?.ssBase}% · IRS: ${h.cfg?.irsTabela}%
     </div>
     <button onclick="deleteHistory(${h.id})" style="
       margin-top:16px; width:100%; padding:12px;
