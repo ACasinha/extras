@@ -83,6 +83,10 @@
           <p>Introduza os dados do mês para obter o valor líquido</p>
         </div>
 
+        <!-- Hidden inputs read by calculator.js — values synced from config -->
+        <input type="hidden" id="salarioBase" />
+        <input type="hidden" id="subRefeicao" />
+
         <div class="calc-cols">
 
           <!-- Card: Salário Base -->
@@ -91,17 +95,25 @@
               <span class="card-title">Salário Base</span>
               <div class="card-icon amber"><span class="material-icons">payments</span></div>
             </div>
-            <div class="field-group">
-              <label class="field-label">Remuneração Base Mensal (€)</label>
-              <input type="number" class="field-input" id="salarioBase"
-                     value="1762.30" step="0.01" inputmode="decimal" onchange="autoCalc()" />
-              <div id="reducaoIndicator" style="margin-top:7px; font-size:12px; color:var(--text-muted); line-height:1.6;"></div>
+
+            <!-- Info banner showing values from config -->
+            <div class="info-box green" style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <span>
+                  Base: <span id="calcBaseDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
+                  &nbsp;·&nbsp;
+                  Sub. Ref.: <span id="calcSubRefDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
+                </span>
+                <button onclick="showTab('config')"
+                        style="background:none; border:none; color:var(--brand); font-size:11px;
+                               cursor:pointer; font-weight:700; padding:0; font-family:'Inter',sans-serif;">
+                  ✎ Editar
+                </button>
+              </div>
             </div>
-            <div class="field-group">
-              <label class="field-label">Subsídio de Refeição — diário (€)</label>
-              <input type="number" class="field-input" id="subRefeicao"
-                     value="6.00" step="0.01" inputmode="decimal" onchange="autoCalc()" />
-            </div>
+
+            <div id="reducaoIndicator" style="margin-bottom:8px; font-size:12px; color:var(--text-muted); line-height:1.6;"></div>
+
             <div class="field-group">
               <label class="field-label">Dias Trabalhados no Mês</label>
               <div class="stepper">
@@ -479,6 +491,24 @@
         </div>
         <div class="config-grid">
 
+          <!-- Card: Vencimento e Subsídio de Refeição -->
+          <div class="card span-2">
+            <div class="card-header">
+              <span class="card-title">Vencimento e Subsídio de Refeição</span>
+              <div class="card-icon amber"><span class="material-icons">payments</span></div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Remuneração Base Mensal (€)</label>
+              <input type="number" class="field-input" id="cfgSalarioBase"
+                     value="1762.30" step="0.01" inputmode="decimal" onchange="saveConfig()" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Subsídio de Refeição — diário (€)</label>
+              <input type="number" class="field-input" id="cfgSubRefeicao"
+                     value="6.00" step="0.01" inputmode="decimal" onchange="saveConfig()" />
+            </div>
+          </div>
+
           <!-- Card: Tabela IRS AT 2026 -->
           <div class="card span-2">
             <div class="card-header">
@@ -673,14 +703,22 @@
     <!-- Data -->
     <div class="field-group">
       <label class="field-label">Data</label>
-      <input type="date" class="field-input" id="regData" />
+      <div style="position:relative; display:flex; align-items:stretch;">
+        <input type="date" class="field-input" id="regData" style="padding-right:44px;" />
+        <button onclick="document.getElementById('regData').showPicker()"
+                style="position:absolute; right:0; top:0; bottom:0; width:44px;
+                       background:transparent; border:none; cursor:pointer;
+                       display:flex; align-items:center; justify-content:center;
+                       color:var(--brand);">
+          <span class="material-icons" style="font-size:20px;">calendar_today</span>
+        </button>
+      </div>
     </div>
 
     <!-- Tipo -->
     <div class="field-group">
       <label class="field-label">Tipo de Dia</label>
-      <select class="field-input" id="regTipo"
-              onchange="toggleRegistoTipoInfo(this.value)">
+      <select class="field-input" id="regTipo" onchange="toggleRegistoTipoInfo(this.value)">
         <option value="normal">Dia de Trabalho Normal</option>
         <option value="descanso">Descanso / Feriado</option>
       </select>
@@ -700,17 +738,20 @@
 
     <!-- Nota opcional -->
     <div class="field-group">
-      <label class="field-label">Nota <span style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0;">(opcional)</span></label>
+      <label class="field-label">
+        Nota
+        <span style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0;">(opcional)</span>
+      </label>
       <input type="text" class="field-input" id="regNota"
              placeholder="ex: Reunião urgente, plantão..." maxlength="80" />
     </div>
 
-    <button class="btn-primary" onclick="saveRegistoEntry()">
-      ✓ Guardar Registo
-    </button>
-    <button class="btn-danger" onclick="closeRegistoModal()">
-      Cancelar
-    </button>
+    <!-- Action buttons — wrapped to respect safe-area and avoid overflow -->
+    <div style="padding-bottom:env(safe-area-inset-bottom, 12px); display:flex; flex-direction:column; gap:8px;">
+      <button class="btn-primary" onclick="saveRegistoEntry()">✓ Guardar Registo</button>
+      <button class="btn-danger"  onclick="closeRegistoModal()" style="margin-top:0;">Cancelar</button>
+    </div>
+
   </div>
 </div>
 
