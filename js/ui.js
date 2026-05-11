@@ -6,7 +6,6 @@ function showTab(tab) {
     t.classList.toggle('active', t.dataset.tab === tab));
   document.querySelectorAll('.page').forEach(p =>
     p.classList.toggle('active', p.id === 'page-' + tab));
-  // Refresh registo when switching to it
   if (tab === 'registo') renderRegisto();
 }
 
@@ -46,6 +45,23 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Calc display (mirrors config values into calc page) ──
+function updateCalcDisplay() {
+  const cfg = loadConfig();
+
+  // Keep hidden inputs in sync so calculator.js can read them
+  const salEl = document.getElementById('salarioBase');
+  const subEl = document.getElementById('subRefeicao');
+  if (salEl) salEl.value = cfg.salarioBase;
+  if (subEl) subEl.value = cfg.subRefeicao;
+
+  // Update the info banner on the calc page
+  const bd = document.getElementById('calcBaseDisplay');
+  const sd = document.getElementById('calcSubRefDisplay');
+  if (bd) bd.textContent = cfg.salarioBase.toLocaleString('pt-PT', { minimumFractionDigits: 2 }) + ' €';
+  if (sd) sd.textContent = cfg.subRefeicao.toLocaleString('pt-PT',  { minimumFractionDigits: 2 }) + ' €';
 }
 
 // ── Online/Offline ─────────────────────────────────
