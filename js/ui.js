@@ -6,14 +6,23 @@ function showTab(tab) {
     t.classList.toggle('active', t.dataset.tab === tab));
   document.querySelectorAll('.page').forEach(p =>
     p.classList.toggle('active', p.id === 'page-' + tab));
+  // Refresh registo when switching to it
+  if (tab === 'registo') renderRegisto();
 }
 
-// ── Stepper ────────────────────────────────────────
+// ── Stepper (integer) ──────────────────────────────
 function stepperChange(id, delta) {
   const el  = document.getElementById(id);
   const val = (parseFloat(el.value) || 0) + delta;
   el.value  = Math.max(0, val);
   autoCalc();
+}
+
+// ── Stepper (float, for registo hours) ────────────
+function stepperChangeFloat(id, delta) {
+  const el  = document.getElementById(id);
+  const val = Math.round(((parseFloat(el.value) || 0) + delta) * 10) / 10;
+  el.value  = Math.max(0.5, val);
 }
 
 // ── Formatting ─────────────────────────────────────
@@ -52,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyConfig(cfg);
   updateOnlineStatus();
   renderHistory();
+  renderRegisto();
   autoCalc();
 
   // Register service worker
