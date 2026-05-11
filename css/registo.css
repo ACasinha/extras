@@ -1,0 +1,150 @@
+/* REGISTO DIÁRIO — STYLES */
+
+/* Month navigator */
+.month-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 10px 6px;
+  margin-bottom: 14px;
+}
+.month-nav-btn {
+  width: 38px; height: 38px;
+  border: none; border-radius: var(--r-sm);
+  background: var(--surface-3);
+  color: var(--text-secondary);
+  font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.month-nav-btn:hover  { background: var(--surface-4); color: var(--brand); }
+.month-nav-btn:active { transform: scale(0.9); }
+.month-nav-label {
+  font-size: 15px; font-weight: 700;
+  color: var(--text-primary); letter-spacing: -0.2px;
+}
+
+/* Summary chips row */
+.registo-summary {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 14px;
+}
+
+/* Transfer button */
+.btn-transfer {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, rgba(110,231,183,0.12), rgba(245,158,11,0.08));
+  border: 1px solid var(--border-brand);
+  border-radius: var(--r-md);
+  color: var(--brand);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  margin-bottom: 16px;
+}
+.btn-transfer:hover  { background: rgba(110,231,183,0.18); border-color: rgba(110,231,183,0.35); }
+.btn-transfer:active { transform: scale(0.98); }
+.btn-transfer span.material-icons { font-size: 20px; }
+
+/* Entry list */
+.registo-list { display: flex; flex-direction: column; gap: 8px; }
+
+.registo-entry {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 12px 14px;
+  transition: border-color 0.15s, background 0.15s;
+  position: relative;
+}
+.registo-entry:hover { border-color: var(--border-brand); background: var(--surface-3); }
+
+.registo-date-col {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 34px; flex-shrink: 0;
+}
+.registo-day-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 20px; font-weight: 500; line-height: 1;
+  color: var(--text-primary);
+}
+.registo-day-name {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.registo-dot {
+  width: 3px; height: 36px;
+  border-radius: 999px; flex-shrink: 0;
+}
+
+.registo-body { flex: 1; min-width: 0; }
+.registo-top {
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap; margin-bottom: 2px;
+}
+.registo-horas {
+  font-family: 'DM Mono', monospace;
+  font-size: 16px; font-weight: 500;
+  color: var(--text-primary);
+}
+.registo-nota { font-size: 13px; cursor: default; }
+.registo-nota-text {
+  font-size: 11px; color: var(--text-muted);
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 200px;
+}
+.registo-valor {
+  font-size: 11px; color: var(--brand);
+  font-family: 'DM Mono', monospace;
+}
+
+.registo-actions {
+  display: flex; flex-direction: column; gap: 2px; flex-shrink: 0;
+}
+.registo-btn-edit,
+.registo-btn-del {
+  width: 32px; height: 32px;
+  border: none; border-radius: var(--r-sm);
+  background: transparent;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.registo-btn-edit { color: var(--text-muted); }
+.registo-btn-edit:hover { background: rgba(96,165,250,0.12); color: var(--blue); }
+.registo-btn-del  { color: var(--text-muted); }
+.registo-btn-del:hover  { background: rgba(248,113,113,0.12); color: var(--danger); }
+
+/* Registo modal specifics */
+.registo-tipo-info {
+  font-size: 12px; line-height: 1.6;
+  padding: 8px 12px;
+  background: var(--surface-3);
+  border-radius: var(--r-sm);
+  margin-top: 6px;
+  color: var(--text-muted);
+}
+
+/* FAB on registo page */
+.fab-registo {
+  position: fixed; bottom: 80px; right: 20px; z-index: 300;
+  width: 54px; height: 54px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-dim));
+  border: none; color: #0a1020; font-size: 26px;
+  cursor: pointer; box-shadow: 0 6px 20px rgba(110,231,183,0.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.fab-registo:hover  { transform: scale(1.05); box-shadow: 0 8px 28px rgba(110,231,183,0.5); }
+.fab-registo:active { transform: scale(0.93); }
+@media (min-width: 768px) { .fab-registo { bottom: 32px; right: 32px; } }
+
+/* Horas input in modal — bigger stepper */
+#regHorasWrap .stepper input { font-size: 22px; }
