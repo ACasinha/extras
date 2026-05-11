@@ -63,7 +63,7 @@
     html, body {
       margin: 0; padding: 0;
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--surface-0);
+      background: var(--surface-0) !important;
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
@@ -76,6 +76,7 @@
   ═══════════════════════════════════════════════ -->
   <style>
     .app-shell {
+      background: var(--surface-0);
       display: flex;
       min-height: 100vh;
     }
@@ -99,6 +100,7 @@
 
     /* ── MOBILE BOTTOM NAV ── */
     .bottom-nav {
+      width: 100% !important;
       position: fixed;
       bottom: 0; left: 0; right: 0;
       z-index: 200;
@@ -106,13 +108,16 @@
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-top: 1px solid var(--border);
-      display: flex;
+      left: 0 !important;
+      right: 0 !important;
+      display: flex !important;
       padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     /* ── TAB BUTTON ── */
     .tab {
-      flex: 1;
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
       padding: 10px 4px;
       border: none;
       background: transparent;
