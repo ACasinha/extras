@@ -24,6 +24,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/registo.css">
 </head>
 <body>
 
@@ -49,6 +50,9 @@
     <nav class="sidebar-nav">
       <button class="sidebar-tab active" data-tab="calc" onclick="showTab('calc')">
         <span class="material-icons">calculate</span> Calcular
+      </button>
+      <button class="sidebar-tab" data-tab="registo" onclick="showTab('registo')">
+        <span class="material-icons">edit_calendar</span> Registo Diário
       </button>
       <button class="sidebar-tab" data-tab="resultado" onclick="showTab('resultado')">
         <span class="material-icons">receipt_long</span> Resumo
@@ -178,6 +182,47 @@
 
         </div><!-- /calc-cols -->
       </div><!-- /page-inner -->
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PAGE: REGISTO DIÁRIO
+    ══════════════════════════════════════════ -->
+    <section class="page" id="page-registo">
+      <div class="page-inner">
+        <div class="page-header">
+          <h1>Registo Diário</h1>
+          <p>Registe as horas extra dia a dia ao longo do mês</p>
+        </div>
+
+        <!-- Month navigator -->
+        <div class="month-nav">
+          <button class="month-nav-btn" onclick="registoNavMonth(-1)">
+            <span class="material-icons">chevron_left</span>
+          </button>
+          <span class="month-nav-label" id="registoMonthLabel">— —</span>
+          <button class="month-nav-btn" onclick="registoNavMonth(1)">
+            <span class="material-icons">chevron_right</span>
+          </button>
+        </div>
+
+        <!-- Summary chips -->
+        <div class="registo-summary" id="regSummary"></div>
+
+        <!-- Transfer to calculator button -->
+        <button class="btn-transfer" id="btnRegistoToCalc" onclick="registoToCalc()" style="display:none;">
+          <span class="material-icons">input</span>
+          Transferir para a Calculadora
+        </button>
+
+        <!-- Entry list -->
+        <div id="registoList" class="registo-list"></div>
+
+      </div><!-- /page-inner -->
+
+      <!-- FAB: add entry -->
+      <button class="fab-registo" onclick="openRegistoModal()" title="Adicionar horas extra">
+        <span class="material-icons">add</span>
+      </button>
     </section>
 
     <!-- ══════════════════════════════════════════
@@ -602,13 +647,13 @@
 </div><!-- /app-shell -->
 
 <!-- ═══════════════════════════════════════════════
-     GLOBAL UI: TOAST, MODAL, BOTTOM NAV
+     GLOBAL UI: TOAST, MODALS, BOTTOM NAV
 ═══════════════════════════════════════════════ -->
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Detail Modal -->
+<!-- Detail Modal (history) -->
 <div class="modal-overlay" id="detailModal" onclick="closeModal()">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -617,11 +662,67 @@
   </div>
 </div>
 
-<!-- Bottom Navigation (mobile) -->
+<!-- ══════════════════════════════════════════
+     REGISTO MODAL — Add / Edit entry
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="registoModal" onclick="closeRegistoModal()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="registoModalTitle">Novo Registo de Horas Extra</div>
+
+    <!-- Data -->
+    <div class="field-group">
+      <label class="field-label">Data</label>
+      <input type="date" class="field-input" id="regData" />
+    </div>
+
+    <!-- Tipo -->
+    <div class="field-group">
+      <label class="field-label">Tipo de Dia</label>
+      <select class="field-input" id="regTipo"
+              onchange="toggleRegistoTipoInfo(this.value)">
+        <option value="normal">Dia de Trabalho Normal</option>
+        <option value="descanso">Descanso / Feriado</option>
+      </select>
+      <div class="registo-tipo-info" id="regTipoInfo"></div>
+    </div>
+
+    <!-- Horas -->
+    <div class="field-group">
+      <label class="field-label">Horas Extra</label>
+      <div class="stepper" id="regHorasWrap">
+        <button onclick="stepperChangeFloat('regHoras', -0.5)">−</button>
+        <input type="number" id="regHoras" value="1" min="0.5" step="0.5"
+               inputmode="decimal" />
+        <button onclick="stepperChangeFloat('regHoras', 0.5)">+</button>
+      </div>
+    </div>
+
+    <!-- Nota opcional -->
+    <div class="field-group">
+      <label class="field-label">Nota <span style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0;">(opcional)</span></label>
+      <input type="text" class="field-input" id="regNota"
+             placeholder="ex: Reunião urgente, plantão..." maxlength="80" />
+    </div>
+
+    <button class="btn-primary" onclick="saveRegistoEntry()">
+      ✓ Guardar Registo
+    </button>
+    <button class="btn-danger" onclick="closeRegistoModal()">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+<!-- Bottom Navigation (mobile) — 5 tabs -->
 <nav class="bottom-nav">
   <button class="tab active" data-tab="calc" onclick="showTab('calc')">
     <span class="material-icons">calculate</span>
     Calcular
+  </button>
+  <button class="tab" data-tab="registo" onclick="showTab('registo')">
+    <span class="material-icons">edit_calendar</span>
+    Registo
   </button>
   <button class="tab" data-tab="resultado" onclick="showTab('resultado')">
     <span class="material-icons">receipt_long</span>
@@ -637,11 +738,12 @@
   </button>
 </nav>
 
-<!-- Aplicação -->
-<script src="js/calculator.js"></script>
-<script src="js/history.js"></script>
+<!-- Scripts -->
 <script src="js/irs-tables.js"></script>
 <script src="js/storage.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/history.js"></script>
+<script src="js/registo.js"></script>
 <script src="js/ui.js"></script>
 
 </body>
