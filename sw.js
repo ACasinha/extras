@@ -1,8 +1,9 @@
 // Service Worker — HorasExtra CMRM
-const CACHE_NAME = 'horasextra-v1.1.9';
+const CACHE_NAME = 'horasextra-v1.1.10';
 const STATIC_ASSETS = [
   './',
   './index.html',
+  './css/style.css',
   './js/calculator.js',
   './js/history.js',
   './js/irs-tables.js',
