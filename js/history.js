@@ -1,6 +1,4 @@
-<!-- ═══════════════════════════════════════════════
-     JAVASCRIPT — HISTORY
-═══════════════════════════════════════════════ -->
+// JAVASCRIPT — HISTORY //
 
 function saveToHistory() {
   if (!currentResult) { showToast('Calcule primeiro!'); return; }
