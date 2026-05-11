@@ -27,8 +27,6 @@
        DESIGN TOKENS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer beercss, app;
-    @layer app {
     :root {
       --brand:        #6ee7b7;
       --brand-dim:    #34d399;
@@ -71,14 +69,12 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        LAYOUT
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .app-shell {
       background: var(--surface-0);
       display: flex;
@@ -234,14 +230,12 @@
         margin-left: var(--nav-w);}
       .page-inner { padding: 32px 32px 40px; }
     }
-        }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        PAGES & ANIMATIONS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .page { display: none; animation: fadeUp 0.22s ease; }
     .page.active { display: block; }
     @keyframes fadeUp {
@@ -267,14 +261,12 @@
       }
       .config-grid .span-2 { grid-column: 1 / -1; }
     }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — CARDS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .page-header { margin-bottom: 24px; }
     .page-header h1 {
       font-size: 22px; font-weight: 700;
@@ -315,14 +307,12 @@
     .card-icon.red    { background: rgba(248,113,113,0.12); color: var(--danger); }
     .card-icon.blue   { background: rgba(96,165,250,0.12);  color: var(--blue); }
     .card-icon.purple { background: rgba(167,139,250,0.12); color: var(--purple); }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — HERO & STATS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .hero-card {
       background: linear-gradient(135deg, rgba(110,231,183,0.07) 0%, rgba(245,158,11,0.04) 100%);
       border-color: var(--border-brand);
@@ -386,14 +376,12 @@
       font-size: 10px; color: var(--text-muted);
       font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
     }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — FORM INPUTS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .field-group { margin-bottom: 16px; }
     .field-group:last-child { margin-bottom: 0; }
 
@@ -460,14 +448,12 @@
       color: var(--text-primary); font-family: 'DM Mono', monospace;
       font-size: 18px; text-align: center; outline: none; min-width: 0;
     }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — BREAKDOWNS, CHIPS, TOGGLES
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     /* Breakdown rows */
     .breakdown-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -524,14 +510,12 @@
     }
     input:checked + .slider { background: var(--brand); }
     input:checked + .slider:before { transform: translateX(20px); }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — PROGRESS, FAB, TOAST, MODAL
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     /* Progress bar */
     .progress-bar {
       height: 5px; background: var(--surface-4);
@@ -603,14 +587,12 @@
       .modal-overlay.open .modal-sheet { transform: none; }
       .modal-handle { display: none; }
     }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — HISTORY, EMPTY STATE, INFO BOX
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     /* History */
     .history-grid { display: grid; gap: 10px; }
     @media (min-width: 540px) { .history-grid { grid-template-columns: 1fr 1fr; } }
@@ -650,14 +632,12 @@
       padding: 8px 20px; text-align: center; display: none;
     }
     .offline-bar.show { display: block; }
-    }
   </style>
 
   <!-- ═══════════════════════════════════════════════
        COMPONENTS — BUTTONS
   ═══════════════════════════════════════════════ -->
   <style>
-    @layer app {
     .btn-primary {
       display: block; width: 100%; padding: 14px;
       background: linear-gradient(135deg, var(--brand), var(--brand-dim));
@@ -683,7 +663,6 @@
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 4px; }
-    }
   </style>
 </head>
 <body>
