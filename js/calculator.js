@@ -1,8 +1,8 @@
-/**
- * Motor de cálculo principal.
- * Replica as fórmulas da folha de Excel original.
- * @returns {object} resultado completo com todos os valores intermédios
- */
+
+ // Motor de cálculo principal. //
+ // Replica as fórmulas da folha de Excel original. //
+ // @returns {object} resultado completo com todos os valores intermédios //
+ 
 function calculate() {
   const cfg = loadConfig();
 
