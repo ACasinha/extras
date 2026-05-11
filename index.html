@@ -10,6 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="HorasExtra" />
   <title>Horas Extra · CMRM</title>
+
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
@@ -17,30 +18,35 @@
   <!-- BeerCSS -->
   <link href="https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.css" rel="stylesheet" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.js"></script>
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
+  <!-- ═══════════════════════════════════════════════
+       DESIGN TOKENS
+  ═══════════════════════════════════════════════ -->
   <style>
     :root {
-      --brand:      #6ee7b7;
-      --brand-dim:  #34d399;
-      --brand-glow: rgba(110,231,183,0.18);
-      --accent:     #f59e0b;
-      --accent-dim: rgba(245,158,11,0.12);
-      --surface-0:  #0e1320;
-      --surface-1:  #141824;
-      --surface-2:  #1b2236;
-      --surface-3:  #222c42;
-      --surface-4:  #2a3550;
-      --border:     rgba(255,255,255,0.07);
+      --brand:        #6ee7b7;
+      --brand-dim:    #34d399;
+      --brand-glow:   rgba(110,231,183,0.18);
+      --accent:       #f59e0b;
+      --accent-dim:   rgba(245,158,11,0.12);
+      --surface-0:    #0e1320;
+      --surface-1:    #141824;
+      --surface-2:    #1b2236;
+      --surface-3:    #222c42;
+      --surface-4:    #2a3550;
+      --border:       rgba(255,255,255,0.07);
       --border-brand: rgba(110,231,183,0.18);
-      --text-primary: #e8edf5;
+      --text-primary:   #e8edf5;
       --text-secondary: #a0aec0;
-      --text-muted: #60728a;
-      --danger:     #f87171;
-      --positive:   #6ee7b7;
-      --blue:       #60a5fa;
-      --purple:     #a78bfa;
+      --text-muted:     #60728a;
+      --danger:   #f87171;
+      --positive: #6ee7b7;
+      --blue:     #60a5fa;
+      --purple:   #a78bfa;
       --r-xl: 20px;
       --r-lg: 16px;
       --r-md: 12px;
@@ -63,27 +69,25 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       LAYOUT — MOBILE FIRST → DESKTOP SIDEBAR
-    ═══════════════════════════════════════════════ */
-
-    /* Mobile: single column, bottom nav */
+  <!-- ═══════════════════════════════════════════════
+       LAYOUT
+  ═══════════════════════════════════════════════ -->
+  <style>
     .app-shell {
       display: flex;
       min-height: 100vh;
     }
 
     /* ── SIDEBAR (desktop only) ── */
-    .sidebar {
-      display: none;
-    }
+    .sidebar { display: none; }
 
     /* ── MAIN CONTENT ── */
     .main-content {
       flex: 1;
       min-width: 0;
-      padding-bottom: 72px; /* space for mobile bottom nav */
+      padding-bottom: 72px;
     }
 
     /* ── PAGE WRAPPER ── */
@@ -98,7 +102,7 @@
       position: fixed;
       bottom: 0; left: 0; right: 0;
       z-index: 200;
-      background: rgba(14, 19, 32, 0.96);
+      background: rgba(14,19,32,0.96);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-top: 1px solid var(--border);
@@ -109,7 +113,7 @@
     /* ── TAB BUTTON ── */
     .tab {
       flex: 1;
-      padding: 10px 4px 10px;
+      padding: 10px 4px;
       border: none;
       background: transparent;
       color: var(--text-muted);
@@ -140,11 +144,8 @@
        DESKTOP ≥ 768px
     ═══════════════════════════════════════════════ */
     @media (min-width: 768px) {
-      body { background: var(--surface-0); }
-
       .app-shell { flex-direction: row; }
 
-      /* Sidebar */
       .sidebar {
         display: flex;
         flex-direction: column;
@@ -177,7 +178,10 @@
       .sidebar-logo-text .app-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
       .sidebar-logo-text .app-sub  { font-size: 11px; color: var(--text-muted); }
 
-      .sidebar-nav { display: flex; flex-direction: column; gap: 2px; padding: 0 10px; flex: 1; }
+      .sidebar-nav {
+        display: flex; flex-direction: column; gap: 2px;
+        padding: 0 10px; flex: 1;
+      }
 
       .sidebar-tab {
         display: flex; align-items: center; gap: 12px;
@@ -189,8 +193,7 @@
         font-size: 13px; font-weight: 500;
         cursor: pointer;
         transition: background 0.15s, color 0.15s;
-        text-align: left;
-        width: 100%;
+        text-align: left; width: 100%;
       }
       .sidebar-tab span.material-icons { font-size: 20px; flex-shrink: 0; }
       .sidebar-tab:hover { background: var(--surface-3); color: var(--text-primary); }
@@ -199,7 +202,6 @@
         color: var(--brand);
         font-weight: 600;
       }
-      .sidebar-tab.active span.material-icons { color: var(--brand); }
 
       .sidebar-footer {
         padding: 16px 20px 0;
@@ -217,17 +219,16 @@
         margin-top: 6px;
       }
 
-      /* Hide mobile nav on desktop */
       .bottom-nav { display: none; }
-
-      /* Main content adjustments */
       .main-content { padding-bottom: 0; }
       .page-inner { padding: 32px 32px 40px; }
     }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       PAGES
-    ═══════════════════════════════════════════════ */
+  <!-- ═══════════════════════════════════════════════
+       PAGES & ANIMATIONS
+  ═══════════════════════════════════════════════ -->
+  <style>
     .page { display: none; animation: fadeUp 0.22s ease; }
     .page.active { display: block; }
     @keyframes fadeUp {
@@ -244,28 +245,30 @@
         align-items: start;
       }
       .calc-cols .span-2 { grid-column: 1 / -1; }
-    }
 
-    /* ═══════════════════════════════════════════════
-       PAGE HEADER
-    ═══════════════════════════════════════════════ */
+      .config-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+      .config-grid .span-2 { grid-column: 1 / -1; }
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — CARDS
+  ═══════════════════════════════════════════════ -->
+  <style>
     .page-header { margin-bottom: 24px; }
     .page-header h1 {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 22px; font-weight: 700;
       color: var(--text-primary);
       margin: 0 0 4px;
       letter-spacing: -0.3px;
     }
-    .page-header p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin: 0;
-    }
+    .page-header p { font-size: 13px; color: var(--text-muted); margin: 0; }
 
-    /* ═══════════════════════════════════════════════
-       CARDS
-    ═══════════════════════════════════════════════ */
     .card {
       background: var(--surface-2);
       border-radius: var(--r-xl);
@@ -276,15 +279,14 @@
       transition: border-color 0.2s;
     }
     .card:last-child { margin-bottom: 0; }
+
     .card-header {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 18px;
     }
     .card-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.4px;
       color: var(--text-muted);
     }
     .card-icon {
@@ -298,10 +300,12 @@
     .card-icon.red    { background: rgba(248,113,113,0.12); color: var(--danger); }
     .card-icon.blue   { background: rgba(96,165,250,0.12);  color: var(--blue); }
     .card-icon.purple { background: rgba(167,139,250,0.12); color: var(--purple); }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       HERO CARD (Resumo top)
-    ═══════════════════════════════════════════════ */
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — HERO & STATS
+  ═══════════════════════════════════════════════ -->
+  <style>
     .hero-card {
       background: linear-gradient(135deg, rgba(110,231,183,0.07) 0%, rgba(245,158,11,0.04) 100%);
       border-color: var(--border-brand);
@@ -316,6 +320,7 @@
       background: radial-gradient(circle, rgba(110,231,183,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
+
     .result-big {
       font-family: 'DM Mono', monospace;
       font-size: clamp(32px, 7vw, 52px);
@@ -333,9 +338,6 @@
       text-transform: uppercase;
     }
 
-    /* ═══════════════════════════════════════════════
-       STAT GRID (2x2)
-    ═══════════════════════════════════════════════ */
     .stat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -356,29 +358,33 @@
     }
     .stat-cell .val {
       font-family: 'DM Mono', monospace;
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 16px; font-weight: 500;
       color: var(--text-primary);
       margin-bottom: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .stat-cell .val.pos { color: var(--positive); }
     .stat-cell .val.neg { color: var(--danger); }
-    .stat-cell .lbl { font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+    .stat-cell .lbl {
+      font-size: 10px; color: var(--text-muted);
+      font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       INPUTS
-    ═══════════════════════════════════════════════ */
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — FORM INPUTS
+  ═══════════════════════════════════════════════ -->
+  <style>
     .field-group { margin-bottom: 16px; }
     .field-group:last-child { margin-bottom: 0; }
+
     .field-label {
       font-size: 11px; font-weight: 600;
       letter-spacing: 0.8px; color: var(--text-secondary);
       text-transform: uppercase; margin-bottom: 7px;
       display: flex; align-items: center; gap: 8px;
     }
+
     .field-input {
       width: 100%;
       background: var(--surface-3);
@@ -398,6 +404,7 @@
       box-shadow: 0 0 0 3px rgba(110,231,183,0.1);
     }
     .field-input.small { font-size: 14px; padding: 10px 12px; }
+
     select.field-input {
       appearance: none; -webkit-appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2360728a' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
@@ -407,9 +414,7 @@
       cursor: pointer;
     }
 
-    /* ═══════════════════════════════════════════════
-       STEPPER
-    ═══════════════════════════════════════════════ */
+    /* Stepper */
     .stepper {
       display: flex; align-items: stretch;
       background: var(--surface-3);
@@ -418,7 +423,10 @@
       overflow: hidden;
       transition: border-color 0.2s;
     }
-    .stepper:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(110,231,183,0.1); }
+    .stepper:focus-within {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(110,231,183,0.1);
+    }
     .stepper button {
       width: 46px; min-height: 46px;
       border: none; background: transparent;
@@ -433,10 +441,13 @@
       color: var(--text-primary); font-family: 'DM Mono', monospace;
       font-size: 18px; text-align: center; outline: none; min-width: 0;
     }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       BREAKDOWN ROWS
-    ═══════════════════════════════════════════════ */
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — BREAKDOWNS, CHIPS, TOGGLES
+  ═══════════════════════════════════════════════ -->
+  <style>
+    /* Breakdown rows */
     .breakdown-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 11px 0;
@@ -447,12 +458,14 @@
     .breakdown-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .breakdown-row .name { font-size: 13px; color: var(--text-primary); font-weight: 600; white-space: nowrap; }
     .breakdown-row .sub  { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-    .breakdown-row .amount { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; flex-shrink: 0; margin-left: 8px; }
+    .breakdown-row .amount {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      flex-shrink: 0; margin-left: 8px;
+    }
     .amount.neg { color: var(--danger); }
 
-    /* ═══════════════════════════════════════════════
-       CHIPS
-    ═══════════════════════════════════════════════ */
+    /* Chips */
     .chip {
       display: inline-flex; align-items: center; gap: 3px;
       padding: 3px 9px; border-radius: 999px;
@@ -463,14 +476,10 @@
     .chip.blue  { background: rgba(96,165,250,0.12);  color: var(--blue); }
     .chip.red   { background: rgba(248,113,113,0.12); color: var(--danger); }
 
-    /* ═══════════════════════════════════════════════
-       DIVIDER
-    ═══════════════════════════════════════════════ */
+    /* Divider */
     .divider-line { height: 1px; background: var(--border); margin: 14px 0; }
 
-    /* ═══════════════════════════════════════════════
-       TOGGLE ROW
-    ═══════════════════════════════════════════════ */
+    /* Toggle row */
     .toggle-row {
       display: flex; align-items: center; justify-content: space-between;
       padding: 13px 0; border-bottom: 1px solid var(--border);
@@ -478,10 +487,12 @@
     .toggle-row:last-of-type { border-bottom: none; }
     .toggle-info .t-name { font-size: 14px; font-weight: 600; }
     .toggle-info .t-sub  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
     .switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider {
-      position: absolute; inset: 0; background: var(--surface-4);
+      position: absolute; inset: 0;
+      background: var(--surface-4);
       border-radius: 999px; cursor: pointer; transition: background 0.2s;
     }
     .slider:before {
@@ -492,12 +503,16 @@
     }
     input:checked + .slider { background: var(--brand); }
     input:checked + .slider:before { transform: translateX(20px); }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       PROGRESS BAR
-    ═══════════════════════════════════════════════ */
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — PROGRESS, FAB, TOAST, MODAL
+  ═══════════════════════════════════════════════ -->
+  <style>
+    /* Progress bar */
     .progress-bar {
-      height: 5px; background: var(--surface-4); border-radius: 999px; overflow: hidden; margin-top: 10px;
+      height: 5px; background: var(--surface-4);
+      border-radius: 999px; overflow: hidden; margin-top: 10px;
     }
     .progress-fill {
       height: 100%; border-radius: 999px;
@@ -505,9 +520,7 @@
       transition: width 0.5s cubic-bezier(0.34,1.1,0.64,1);
     }
 
-    /* ═══════════════════════════════════════════════
-       FAB
-    ═══════════════════════════════════════════════ */
+    /* FAB */
     .fab {
       position: fixed; bottom: 80px; right: 20px; z-index: 300;
       width: 54px; height: 54px; border-radius: 16px;
@@ -519,13 +532,9 @@
     }
     .fab:hover  { transform: scale(1.05); box-shadow: 0 8px 28px rgba(110,231,183,0.5); }
     .fab:active { transform: scale(0.93); box-shadow: 0 3px 10px rgba(110,231,183,0.25); }
-    @media (min-width: 768px) {
-      .fab { bottom: 32px; right: 32px; }
-    }
+    @media (min-width: 768px) { .fab { bottom: 32px; right: 32px; } }
 
-    /* ═══════════════════════════════════════════════
-       TOAST
-    ═══════════════════════════════════════════════ */
+    /* Toast */
     .toast {
       position: fixed; bottom: 84px; left: 50%;
       transform: translateX(-50%) translateY(12px);
@@ -541,54 +550,7 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     @media (min-width: 768px) { .toast { bottom: 32px; } }
 
-    /* ═══════════════════════════════════════════════
-       HISTORY
-    ═══════════════════════════════════════════════ */
-    .history-grid {
-      display: grid;
-      gap: 10px;
-    }
-    @media (min-width: 540px) {
-      .history-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 900px) {
-      .history-grid { grid-template-columns: 1fr 1fr 1fr; }
-    }
-    .history-item {
-      background: var(--surface-2);
-      border-radius: var(--r-lg);
-      border: 1px solid var(--border);
-      padding: 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    }
-    .history-item:hover  { background: var(--surface-3); border-color: var(--border-brand); }
-    .history-item:active { transform: scale(0.98); }
-    .history-date { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
-    .history-net  { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; color: var(--brand); }
-
-    /* ═══════════════════════════════════════════════
-       EMPTY STATE
-    ═══════════════════════════════════════════════ */
-    .empty-state {
-      text-align: center; padding: 64px 20px; color: var(--text-muted);
-    }
-    .empty-state .emoji { font-size: 52px; margin-bottom: 16px; display: block; }
-    .empty-state p { font-size: 14px; line-height: 1.7; margin: 0; }
-
-    /* ═══════════════════════════════════════════════
-       OFFLINE BAR
-    ═══════════════════════════════════════════════ */
-    .offline-bar {
-      background: var(--accent); color: #1a0f00;
-      font-size: 12px; font-weight: 700;
-      padding: 8px 20px; text-align: center; display: none;
-    }
-    .offline-bar.show { display: block; }
-
-    /* ═══════════════════════════════════════════════
-       MODAL SHEET
-    ═══════════════════════════════════════════════ */
+    /* Modal */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.65);
       z-index: 400; display: flex; align-items: flex-end;
@@ -603,7 +565,10 @@
       max-height: 90vh; overflow-y: auto;
     }
     .modal-overlay.open .modal-sheet { transform: translateY(0); }
-    .modal-handle { width: 36px; height: 4px; background: var(--surface-4); border-radius: 999px; margin: 0 auto 18px; }
+    .modal-handle {
+      width: 36px; height: 4px; background: var(--surface-4);
+      border-radius: 999px; margin: 0 auto 18px;
+    }
     .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
     @media (min-width: 768px) {
       .modal-overlay { align-items: center; justify-content: center; }
@@ -615,26 +580,57 @@
       .modal-overlay.open .modal-sheet { transform: none; }
       .modal-handle { display: none; }
     }
+  </style>
 
-    /* ═══════════════════════════════════════════════
-       SECTION TITLE
-    ═══════════════════════════════════════════════ */
-    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .section-sub   { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; }
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — HISTORY, EMPTY STATE, INFO BOX
+  ═══════════════════════════════════════════════ -->
+  <style>
+    /* History */
+    .history-grid { display: grid; gap: 10px; }
+    @media (min-width: 540px) { .history-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .history-grid { grid-template-columns: 1fr 1fr 1fr; } }
 
-    /* ═══════════════════════════════════════════════
-       CONFIG GRID (desktop: 2 columns)
-    ═══════════════════════════════════════════════ */
-    @media (min-width: 768px) {
-      .config-grid {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;
-      }
-      .config-grid .span-2 { grid-column: 1 / -1; }
+    .history-item {
+      background: var(--surface-2);
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      padding: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; transition: background 0.15s, border-color 0.15s, transform 0.1s;
     }
+    .history-item:hover  { background: var(--surface-3); border-color: var(--border-brand); }
+    .history-item:active { transform: scale(0.98); }
+    .history-date { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .history-net  { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; color: var(--brand); }
 
-    /* ═══════════════════════════════════════════════
-       PRIMARY BUTTON
-    ═══════════════════════════════════════════════ */
+    /* Empty state */
+    .empty-state { text-align: center; padding: 64px 20px; color: var(--text-muted); }
+    .empty-state .emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+    .empty-state p { font-size: 14px; line-height: 1.7; margin: 0; }
+
+    /* Info box */
+    .info-box {
+      font-size: 12px; color: var(--text-muted); line-height: 1.7;
+      padding: 10px 12px; border-radius: var(--r-sm); margin-bottom: 14px;
+    }
+    .info-box.green { background: rgba(110,231,183,0.05); border: 1px solid rgba(110,231,183,0.12); }
+    .info-box.amber { background: rgba(245,158,11,0.05);  border: 1px solid rgba(245,158,11,0.15); }
+    .info-box.red   { background: rgba(248,113,113,0.05); border: 1px solid rgba(248,113,113,0.12); }
+
+    /* Offline bar */
+    .offline-bar {
+      background: var(--accent); color: #1a0f00;
+      font-size: 12px; font-weight: 700;
+      padding: 8px 20px; text-align: center; display: none;
+    }
+    .offline-bar.show { display: block; }
+  </style>
+
+  <!-- ═══════════════════════════════════════════════
+       COMPONENTS — BUTTONS
+  ═══════════════════════════════════════════════ -->
+  <style>
     .btn-primary {
       display: block; width: 100%; padding: 14px;
       background: linear-gradient(135deg, var(--brand), var(--brand-dim));
@@ -656,20 +652,7 @@
     }
     .btn-danger:hover { background: rgba(248,113,113,0.14); }
 
-    /* ═══════════════════════════════════════════════
-       INFO BOX
-    ═══════════════════════════════════════════════ */
-    .info-box {
-      font-size: 12px; color: var(--text-muted); line-height: 1.7;
-      padding: 10px 12px; border-radius: var(--r-sm); margin-bottom: 14px;
-    }
-    .info-box.green { background: rgba(110,231,183,0.05); border: 1px solid rgba(110,231,183,0.12); }
-    .info-box.amber { background: rgba(245,158,11,0.05);  border: 1px solid rgba(245,158,11,0.15); }
-    .info-box.red   { background: rgba(248,113,113,0.05); border: 1px solid rgba(248,113,113,0.12); }
-
-    /* ═══════════════════════════════════════════════
-       SCROLLBAR
-    ═══════════════════════════════════════════════ */
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 4px; }
@@ -677,11 +660,17 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════
+     OFFLINE BAR
+═══════════════════════════════════════════════ -->
 <div class="offline-bar" id="offlineBar">📡 Modo offline · Dados guardados localmente</div>
 
+<!-- ═══════════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════════ -->
 <div class="app-shell">
 
-  <!-- ═══ DESKTOP SIDEBAR ═══ -->
+  <!-- ── DESKTOP SIDEBAR ── -->
   <aside class="sidebar">
     <div class="sidebar-logo">
       <div class="sidebar-logo-icon">⏱</div>
@@ -710,17 +699,22 @@
     </div>
   </aside>
 
-  <!-- ═══ MAIN CONTENT ═══ -->
+  <!-- ── MAIN CONTENT ── -->
   <main class="main-content">
 
-    <!-- ══ CALCULAR ══ -->
+    <!-- ══════════════════════════════════════════
+         PAGE: CALCULAR
+    ══════════════════════════════════════════ -->
     <section class="page active" id="page-calc">
       <div class="page-inner">
         <div class="page-header">
           <h1>Calcular Horas Extra</h1>
           <p>Introduza os dados do mês para obter o valor líquido</p>
         </div>
+
         <div class="calc-cols">
+
+          <!-- Card: Salário Base -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Salário Base</span>
@@ -728,23 +722,27 @@
             </div>
             <div class="field-group">
               <label class="field-label">Remuneração Base Mensal (€)</label>
-              <input type="number" class="field-input" id="salarioBase" value="1762.30" step="0.01" inputmode="decimal" onchange="autoCalc()" />
+              <input type="number" class="field-input" id="salarioBase"
+                     value="1762.30" step="0.01" inputmode="decimal" onchange="autoCalc()" />
               <div id="reducaoIndicator" style="margin-top:7px; font-size:12px; color:var(--text-muted); line-height:1.6;"></div>
             </div>
             <div class="field-group">
               <label class="field-label">Subsídio de Refeição — diário (€)</label>
-              <input type="number" class="field-input" id="subRefeicao" value="6.00" step="0.01" inputmode="decimal" onchange="autoCalc()" />
+              <input type="number" class="field-input" id="subRefeicao"
+                     value="6.00" step="0.01" inputmode="decimal" onchange="autoCalc()" />
             </div>
             <div class="field-group">
               <label class="field-label">Dias Trabalhados no Mês</label>
               <div class="stepper">
                 <button onclick="stepperChange('diasTrabalho', -1)">−</button>
-                <input type="number" id="diasTrabalho" value="18" min="1" max="31" inputmode="numeric" onchange="autoCalc()" />
+                <input type="number" id="diasTrabalho" value="18" min="1" max="31"
+                       inputmode="numeric" onchange="autoCalc()" />
                 <button onclick="stepperChange('diasTrabalho', 1)">+</button>
               </div>
             </div>
           </div>
 
+          <!-- Card: Horas Extra -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Horas Extra</span>
@@ -754,7 +752,8 @@
               <label class="field-label">Dia Normal — 1ª Hora <span class="chip amber">+25%</span></label>
               <div class="stepper">
                 <button onclick="stepperChange('h1Normal', -1)">−</button>
-                <input type="number" id="h1Normal" value="2" min="0" inputmode="numeric" onchange="autoCalc()" />
+                <input type="number" id="h1Normal" value="2" min="0"
+                       inputmode="numeric" onchange="autoCalc()" />
                 <button onclick="stepperChange('h1Normal', 1)">+</button>
               </div>
             </div>
@@ -762,7 +761,8 @@
               <label class="field-label">Dia Normal — Restantes <span class="chip amber">+37.5%</span></label>
               <div class="stepper">
                 <button onclick="stepperChange('hNormalRest', -1)">−</button>
-                <input type="number" id="hNormalRest" value="6" min="0" inputmode="numeric" onchange="autoCalc()" />
+                <input type="number" id="hNormalRest" value="6" min="0"
+                       inputmode="numeric" onchange="autoCalc()" />
                 <button onclick="stepperChange('hNormalRest', 1)">+</button>
               </div>
             </div>
@@ -770,7 +770,8 @@
               <label class="field-label">Descanso / Feriado <span class="chip green">+50%</span></label>
               <div class="stepper">
                 <button onclick="stepperChange('hDescanso', -1)">−</button>
-                <input type="number" id="hDescanso" value="8" min="0" inputmode="numeric" onchange="autoCalc()" />
+                <input type="number" id="hDescanso" value="8" min="0"
+                       inputmode="numeric" onchange="autoCalc()" />
                 <button onclick="stepperChange('hDescanso', 1)">+</button>
               </div>
             </div>
@@ -779,26 +780,42 @@
             </div>
           </div>
 
+          <!-- Card: Pré-visualização -->
           <div class="card span-2">
             <div class="card-header">
               <span class="card-title">Pré-visualização</span>
               <div class="card-icon blue"><span class="material-icons">preview</span></div>
             </div>
             <div class="stat-grid">
-              <div class="stat-cell"><div class="val pos" id="prevBruto">—</div><div class="lbl">Bruto Total</div></div>
-              <div class="stat-cell hl"><div class="val pos" id="prevLiquido">—</div><div class="lbl">Líquido Total</div></div>
-              <div class="stat-cell"><div class="val" id="prevHorasVal">—</div><div class="lbl">Val. Horas Extra</div></div>
-              <div class="stat-cell"><div class="val neg" id="prevDescontos">—</div><div class="lbl">Total Descontos</div></div>
+              <div class="stat-cell">
+                <div class="val pos" id="prevBruto">—</div>
+                <div class="lbl">Bruto Total</div>
+              </div>
+              <div class="stat-cell hl">
+                <div class="val pos" id="prevLiquido">—</div>
+                <div class="lbl">Líquido Total</div>
+              </div>
+              <div class="stat-cell">
+                <div class="val" id="prevHorasVal">—</div>
+                <div class="lbl">Val. Horas Extra</div>
+              </div>
+              <div class="stat-cell">
+                <div class="val neg" id="prevDescontos">—</div>
+                <div class="lbl">Total Descontos</div>
+              </div>
             </div>
             <button class="fab" onclick="calculate(); showTab('resultado')" title="Ver Resumo">
               <span class="material-icons">arrow_forward</span>
             </button>
           </div>
-        </div>
-      </div>
+
+        </div><!-- /calc-cols -->
+      </div><!-- /page-inner -->
     </section>
 
-    <!-- ══ RESUMO ══ -->
+    <!-- ══════════════════════════════════════════
+         PAGE: RESUMO
+    ══════════════════════════════════════════ -->
     <section class="page" id="page-resultado">
       <div class="page-inner">
         <div class="page-header">
@@ -806,14 +823,17 @@
           <p>Breakdown completo de vencimentos e descontos</p>
         </div>
 
+        <!-- Hero: Líquido Total -->
         <div class="card hero-card">
           <div class="result-label">Salário Líquido Total</div>
           <div class="result-big" id="resLiquido">0,00 €</div>
           <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
             <span class="chip green" id="resBrutoChip">Bruto: 0,00 €</span>
-            <span class="chip red" id="resDescontosChip">Desc.: 0,00 €</span>
+            <span class="chip red"   id="resDescontosChip">Desc.: 0,00 €</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill" id="progressLiquido" style="width:0%"></div></div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressLiquido" style="width:0%"></div>
+          </div>
           <div style="display:flex; justify-content:space-between; margin-top:5px;">
             <span style="font-size:10px; color:var(--text-muted);">Descontos sobre bruto</span>
             <span style="font-size:10px; color:var(--text-muted);" id="progressPct">0%</span>
@@ -821,18 +841,41 @@
         </div>
 
         <div class="calc-cols">
+
+          <!-- Card: Horas Extra -->
           <div class="card">
-            <div class="card-header"><span class="card-title">Horas Extra</span><div class="card-icon green"><span class="material-icons">more_time</span></div></div>
+            <div class="card-header">
+              <span class="card-title">Horas Extra</span>
+              <div class="card-icon green"><span class="material-icons">more_time</span></div>
+            </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--brand)"></div><div><div class="name">1ª Hora (dia normal)</div><div class="sub" id="bk1hDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--brand)"></div>
+                <div>
+                  <div class="name">1ª Hora (dia normal)</div>
+                  <div class="sub" id="bk1hDesc"></div>
+                </div>
+              </div>
               <div class="amount" id="bk1hVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--blue)"></div><div><div class="name">Restantes (dia normal)</div><div class="sub" id="bkRestDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--blue)"></div>
+                <div>
+                  <div class="name">Restantes (dia normal)</div>
+                  <div class="sub" id="bkRestDesc"></div>
+                </div>
+              </div>
               <div class="amount" id="bkRestVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--accent)"></div><div><div class="name">Descanso / Feriado</div><div class="sub" id="bkDescDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--accent)"></div>
+                <div>
+                  <div class="name">Descanso / Feriado</div>
+                  <div class="sub" id="bkDescDesc"></div>
+                </div>
+              </div>
               <div class="amount" id="bkDescVal">0,00 €</div>
             </div>
             <div class="divider-line"></div>
@@ -846,18 +889,40 @@
             </div>
           </div>
 
+          <!-- Card: Ordenado Base -->
           <div class="card">
-            <div class="card-header"><span class="card-title">Ordenado Base</span><div class="card-icon amber"><span class="material-icons">account_balance_wallet</span></div></div>
+            <div class="card-header">
+              <span class="card-title">Ordenado Base</span>
+              <div class="card-icon amber"><span class="material-icons">account_balance_wallet</span></div>
+            </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--text-muted)"></div><div><div class="name">Base Mensal Normal</div><div class="sub" id="bkBaseNorm"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--text-muted)"></div>
+                <div>
+                  <div class="name">Base Mensal Normal</div>
+                  <div class="sub" id="bkBaseNorm"></div>
+                </div>
+              </div>
               <div class="amount" id="bkBaseNormVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--purple)"></div><div><div class="name">Base Ajustada</div><div class="sub" id="bkBaseAjDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--purple)"></div>
+                <div>
+                  <div class="name">Base Ajustada</div>
+                  <div class="sub" id="bkBaseAjDesc"></div>
+                </div>
+              </div>
               <div class="amount" id="bkBaseAjVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--accent)"></div><div><div class="name">Subsídio de Refeição</div><div class="sub" id="bkSubRefDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--accent)"></div>
+                <div>
+                  <div class="name">Subsídio de Refeição</div>
+                  <div class="sub" id="bkSubRefDesc"></div>
+                </div>
+              </div>
               <div class="amount" id="bkSubRefVal">0,00 €</div>
             </div>
             <div class="divider-line"></div>
@@ -867,30 +932,70 @@
             </div>
           </div>
 
+          <!-- Card: Descontos -->
           <div class="card">
-            <div class="card-header"><span class="card-title">Descontos</span><div class="card-icon red"><span class="material-icons">remove_circle_outline</span></div></div>
+            <div class="card-header">
+              <span class="card-title">Descontos</span>
+              <div class="card-icon red"><span class="material-icons">remove_circle_outline</span></div>
+            </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:var(--danger)"></div><div><div class="name">IRS (Horas Extra)</div><div class="sub" id="bkIrsHDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:var(--danger)"></div>
+                <div>
+                  <div class="name">IRS (Horas Extra)</div>
+                  <div class="sub" id="bkIrsHDesc"></div>
+                </div>
+              </div>
               <div class="amount neg" id="bkIrsHVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:#f87171aa"></div><div><div class="name">Seg. Social (Horas Extra)</div><div class="sub" id="bkSsHDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:#f87171aa"></div>
+                <div>
+                  <div class="name">Seg. Social (Horas Extra)</div>
+                  <div class="sub" id="bkSsHDesc"></div>
+                </div>
+              </div>
               <div class="amount neg" id="bkSsHVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:#fb923c"></div><div><div class="name">IRS (Ordenado Base)</div><div class="sub" id="bkIrsBDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:#fb923c"></div>
+                <div>
+                  <div class="name">IRS (Ordenado Base)</div>
+                  <div class="sub" id="bkIrsBDesc"></div>
+                </div>
+              </div>
               <div class="amount neg" id="bkIrsBVal">0,00 €</div>
             </div>
             <div class="breakdown-row">
-              <div class="left"><div class="breakdown-dot" style="background:#fb923caa"></div><div><div class="name">Seg. Social (Base)</div><div class="sub" id="bkSsBDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:#fb923caa"></div>
+                <div>
+                  <div class="name">Seg. Social (Base)</div>
+                  <div class="sub" id="bkSsBDesc"></div>
+                </div>
+              </div>
               <div class="amount neg" id="bkSsBVal">0,00 €</div>
             </div>
             <div class="breakdown-row" id="rowAdse">
-              <div class="left"><div class="breakdown-dot" style="background:#34d399aa"></div><div><div class="name">ADSE</div><div class="sub" id="bkAdseDesc"></div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:#34d399aa"></div>
+                <div>
+                  <div class="name">ADSE</div>
+                  <div class="sub" id="bkAdseDesc"></div>
+                </div>
+              </div>
               <div class="amount neg" id="bkAdseVal">0,00 €</div>
             </div>
             <div class="breakdown-row" id="rowCamaraClube">
-              <div class="left"><div class="breakdown-dot" style="background:#60a5faaa"></div><div><div class="name">Câmara Clube</div><div class="sub">Desconto fixo</div></div></div>
+              <div class="left">
+                <div class="breakdown-dot" style="background:#60a5faaa"></div>
+                <div>
+                  <div class="name">Câmara Clube</div>
+                  <div class="sub">Desconto fixo</div>
+                </div>
+              </div>
               <div class="amount neg" id="bkCamaraClube">0,00 €</div>
             </div>
             <div class="divider-line"></div>
@@ -900,23 +1005,42 @@
             </div>
           </div>
 
+          <!-- Card: Resumo Final -->
           <div class="card">
-            <div class="card-header"><span class="card-title">Resumo Final</span><div class="card-icon green"><span class="material-icons">summarize</span></div></div>
+            <div class="card-header">
+              <span class="card-title">Resumo Final</span>
+              <div class="card-icon green"><span class="material-icons">summarize</span></div>
+            </div>
             <div class="stat-grid">
-              <div class="stat-cell"><div class="val" id="resSalBruto">0,00 €</div><div class="lbl">Salário Bruto</div></div>
-              <div class="stat-cell hl"><div class="val pos" id="resSalLiquidoGrid">0,00 €</div><div class="lbl">Salário Líquido</div></div>
-              <div class="stat-cell"><div class="val" id="resRemHoraria">0,00 €</div><div class="lbl">Rem. Horária</div></div>
-              <div class="stat-cell"><div class="val neg" id="resTotalDesc">0,00 €</div><div class="lbl">Total Descontos</div></div>
+              <div class="stat-cell">
+                <div class="val" id="resSalBruto">0,00 €</div>
+                <div class="lbl">Salário Bruto</div>
+              </div>
+              <div class="stat-cell hl">
+                <div class="val pos" id="resSalLiquidoGrid">0,00 €</div>
+                <div class="lbl">Salário Líquido</div>
+              </div>
+              <div class="stat-cell">
+                <div class="val" id="resRemHoraria">0,00 €</div>
+                <div class="lbl">Rem. Horária</div>
+              </div>
+              <div class="stat-cell">
+                <div class="val neg" id="resTotalDesc">0,00 €</div>
+                <div class="lbl">Total Descontos</div>
+              </div>
             </div>
             <div style="margin-top:16px;">
               <button class="btn-primary" onclick="saveToHistory()">💾 Guardar no Histórico</button>
             </div>
           </div>
-        </div>
-      </div>
+
+        </div><!-- /calc-cols -->
+      </div><!-- /page-inner -->
     </section>
 
-    <!-- ══ HISTÓRICO ══ -->
+    <!-- ══════════════════════════════════════════
+         PAGE: HISTÓRICO
+    ══════════════════════════════════════════ -->
     <section class="page" id="page-historico">
       <div class="page-inner">
         <div class="page-header">
@@ -932,7 +1056,9 @@
       </div>
     </section>
 
-    <!-- ══ CONFIG ══ -->
+    <!-- ══════════════════════════════════════════
+         PAGE: CONFIGURAÇÕES
+    ══════════════════════════════════════════ -->
     <section class="page" id="page-config">
       <div class="page-inner">
         <div class="page-header">
@@ -941,13 +1067,17 @@
         </div>
         <div class="config-grid">
 
-          <!-- IRS -->
+          <!-- Card: Tabela IRS AT 2026 -->
           <div class="card span-2">
             <div class="card-header">
               <span class="card-title">Tabela de Retenção na Fonte — IRS AT 2026</span>
               <div class="card-icon amber"><span class="material-icons">account_balance</span></div>
             </div>
-            <div class="info-box green">ℹ️ Tabelas AT 2026 — Continente. Fórmula oficial: <strong style="color:var(--text-primary)">R × taxa − parcela − (parcela_dep × n_deps)</strong>. Horas extra: 50% da taxa efetiva. SS: taxa normal.</div>
+            <div class="info-box green">
+              ℹ️ Tabelas AT 2026 — Continente. Fórmula oficial:
+              <strong style="color:var(--text-primary)">R × taxa − parcela − (parcela_dep × n_deps)</strong>.
+              Horas extra: 50% da taxa efetiva. SS: taxa normal.
+            </div>
             <div class="field-group">
               <label class="field-label">Tabela aplicável</label>
               <select class="field-input small" id="cfgIrsTabela" onchange="saveConfig(); updateTabelaPreview()">
@@ -964,14 +1094,15 @@
               <label class="field-label">Nº de Dependentes</label>
               <div class="stepper">
                 <button onclick="stepperChange('cfgDependentes', -1)">−</button>
-                <input type="number" id="cfgDependentes" value="0" min="0" max="10" inputmode="numeric" onchange="saveConfig()" />
+                <input type="number" id="cfgDependentes" value="0" min="0" max="10"
+                       inputmode="numeric" onchange="saveConfig()" />
                 <button onclick="stepperChange('cfgDependentes', 1)">+</button>
               </div>
             </div>
             <div id="tabelaPreview" style="padding:12px; background:var(--surface-3); border-radius:var(--r-md); font-size:12px; color:var(--text-muted); line-height:1.8;"></div>
           </div>
 
-          <!-- SS e ADSE -->
+          <!-- Card: SS e ADSE -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Segurança Social e ADSE</span>
@@ -979,33 +1110,49 @@
             </div>
             <div class="field-group">
               <label class="field-label">Taxa Seg. Social (%)</label>
-              <input type="number" class="field-input small" id="cfgSsBase" value="11.00" step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
-              <div style="font-size:11px; color:var(--text-muted); margin-top:5px;">Aplicada ao ordenado base e horas extra</div>
+              <input type="number" class="field-input small" id="cfgSsBase"
+                     value="11.00" step="0.01" min="0" max="100"
+                     inputmode="decimal" onchange="saveConfig()" />
+              <div style="font-size:11px; color:var(--text-muted); margin-top:5px;">
+                Aplicada ao ordenado base e horas extra
+              </div>
             </div>
             <div class="field-group">
               <label class="field-label">Taxa ADSE (%)</label>
-              <input type="number" class="field-input small" id="cfgAdse" value="3.50" step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgAdse"
+                     value="3.50" step="0.01" min="0" max="100"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
           </div>
 
-          <!-- Redução -->
+          <!-- Card: Redução do Vencimento Base -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Redução do Vencimento Base</span>
               <div class="card-icon red"><span class="material-icons">trending_down</span></div>
             </div>
-            <div class="info-box red">⚠️ Afeta a remuneração horária (base de cálculo das horas extra).</div>
+            <div class="info-box red">
+              ⚠️ Afeta a remuneração horária (base de cálculo das horas extra).
+            </div>
             <div class="toggle-row">
-              <div class="toggle-info"><div class="t-name">Aplicar Redução</div><div class="t-sub">Afeta a rem. horária</div></div>
-              <label class="switch"><input type="checkbox" id="cfgReducaoActive" checked onchange="saveConfig()" /><span class="slider"></span></label>
+              <div class="toggle-info">
+                <div class="t-name">Aplicar Redução</div>
+                <div class="t-sub">Afeta a rem. horária</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="cfgReducaoActive" checked onchange="saveConfig()" />
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="field-group" style="margin-top:14px;">
               <label class="field-label">Percentagem de Redução (%)</label>
-              <input type="number" class="field-input small" id="cfgReducaoPct" value="20" step="0.5" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgReducaoPct"
+                     value="20" step="0.5" min="0" max="100"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
           </div>
 
-          <!-- Percentagens Horas Extra -->
+          <!-- Card: Percentagens Horas Extra -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Percentagens Horas Extra</span>
@@ -1013,45 +1160,67 @@
             </div>
             <div class="field-group">
               <label class="field-label">1ª Hora — Dia Normal (%)</label>
-              <input type="number" class="field-input small" id="cfgP1h" value="25" step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgP1h"
+                     value="25" step="0.5" min="0"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
             <div class="field-group">
               <label class="field-label">Restantes — Dia Normal (%)</label>
-              <input type="number" class="field-input small" id="cfgPRest" value="37.5" step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgPRest"
+                     value="37.5" step="0.5" min="0"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
             <div class="field-group">
               <label class="field-label">Descanso / Feriado (%)</label>
-              <input type="number" class="field-input small" id="cfgPDesc" value="50" step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgPDesc"
+                     value="50" step="0.5" min="0"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
           </div>
 
-          <!-- Outros Descontos -->
+          <!-- Card: Outros Descontos -->
           <div class="card">
             <div class="card-header">
               <span class="card-title">Outros Descontos</span>
               <div class="card-icon purple"><span class="material-icons">remove</span></div>
             </div>
             <div class="toggle-row">
-              <div class="toggle-info"><div class="t-name">ADSE</div><div class="t-sub">Assistência na Doença</div></div>
-              <label class="switch"><input type="checkbox" id="cfgAdseActive" checked onchange="saveConfig()" /><span class="slider"></span></label>
+              <div class="toggle-info">
+                <div class="t-name">ADSE</div>
+                <div class="t-sub">Assistência na Doença</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="cfgAdseActive" checked onchange="saveConfig()" />
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="toggle-row">
-              <div class="toggle-info"><div class="t-name">Câmara Clube</div><div class="t-sub">Desconto fixo mensal</div></div>
-              <label class="switch"><input type="checkbox" id="cfgCamaraActive" checked onchange="saveConfig()" /><span class="slider"></span></label>
+              <div class="toggle-info">
+                <div class="t-name">Câmara Clube</div>
+                <div class="t-sub">Desconto fixo mensal</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="cfgCamaraActive" checked onchange="saveConfig()" />
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="field-group" style="margin-top:14px;">
               <label class="field-label">Câmara Clube (€ fixo)</label>
-              <input type="number" class="field-input small" id="cfgCamaraVal" value="1.00" step="0.01" min="0" inputmode="decimal" onchange="saveConfig()" />
+              <input type="number" class="field-input small" id="cfgCamaraVal"
+                     value="1.00" step="0.01" min="0"
+                     inputmode="decimal" onchange="saveConfig()" />
             </div>
           </div>
 
-          <!-- Cloud -->
+          <!-- Card: Sincronização Cloud (placeholder) -->
           <div class="card" style="opacity:0.55;">
             <div class="card-header">
               <span class="card-title">Sincronização Cloud</span>
               <div class="card-icon blue"><span class="material-icons">cloud_sync</span></div>
             </div>
-            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Firebase Authentication + Cloud Firestore — disponível em versão futura.</div>
+            <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">
+              Firebase Authentication + Cloud Firestore — disponível em versão futura.
+            </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
               <span class="chip amber">🔒 Em Desenvolvimento</span>
               <span class="chip green">✓ Dados Locais Activos</span>
@@ -1065,526 +1234,9 @@
   </main><!-- /main-content -->
 </div><!-- /app-shell -->
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<!-- Detail Modal -->
-<div class="modal-overlay" id="detailModal" onclick="closeModal()">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="modalTitle">Detalhe</div>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-  <!-- Salário Base -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Salário Base</span>
-      <div class="card-icon amber"><span class="material-icons">payments</span></div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Remuneração Base Mensal Normal (€)</label>
-      <input type="number" class="field-input" id="salarioBase" value="1762.30" step="0.01"
-             inputmode="decimal" onchange="autoCalc()" />
-      <div id="reducaoIndicator" style="margin-top:6px; font-size:12px; color:var(--text-muted);"></div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Subsidio de Refeição (diário) (€)</label>
-      <input type="number" class="field-input" id="subRefeicao" value="6.00" step="0.01"
-             inputmode="decimal" onchange="autoCalc()" />
-    </div>
-    <div class="field-group">
-      <label class="field-label">Dias de Trabalho no Mês</label>
-      <div class="stepper">
-        <button onclick="stepperChange('diasTrabalho', -1)">−</button>
-        <input type="number" id="diasTrabalho" value="18" min="1" max="31"
-               inputmode="numeric" onchange="autoCalc()" />
-        <button onclick="stepperChange('diasTrabalho', 1)">+</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Horas Extra -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Horas Extra</span>
-      <div class="card-icon green"><span class="material-icons">schedule</span></div>
-    </div>
-
-    <!-- Dia normal 1ª hora -->
-    <div class="field-group">
-      <label class="field-label">Dia Normal — 1ª Hora <span class="chip amber">+25%</span></label>
-      <div class="stepper">
-        <button onclick="stepperChange('h1Normal', -1)">−</button>
-        <input type="number" id="h1Normal" value="2" min="0"
-               inputmode="numeric" onchange="autoCalc()" />
-        <button onclick="stepperChange('h1Normal', 1)">+</button>
-      </div>
-    </div>
-
-    <!-- Dia normal restantes -->
-    <div class="field-group">
-      <label class="field-label">Dia Normal — Restantes <span class="chip amber">+37.5%</span></label>
-      <div class="stepper">
-        <button onclick="stepperChange('hNormalRest', -1)">−</button>
-        <input type="number" id="hNormalRest" value="6" min="0"
-               inputmode="numeric" onchange="autoCalc()" />
-        <button onclick="stepperChange('hNormalRest', 1)">+</button>
-      </div>
-    </div>
-
-    <!-- Dia descanso/feriado -->
-    <div class="field-group">
-      <label class="field-label">Descanso / Feriado <span class="chip green">+50%</span></label>
-      <div class="stepper">
-        <button onclick="stepperChange('hDescanso', -1)">−</button>
-        <input type="number" id="hDescanso" value="8" min="0"
-               inputmode="numeric" onchange="autoCalc()" />
-        <button onclick="stepperChange('hDescanso', 1)">+</button>
-      </div>
-    </div>
-
-    <div id="totalHorasChip" style="margin-top:4px; text-align:right;">
-      <span class="chip green">⏱ 16 horas extra</span>
-    </div>
-  </div>
-
-  <!-- Quick preview -->
-  <div class="card" id="quickPreview">
-    <div class="card-header">
-      <span class="card-title">Pré-visualização</span>
-      <div class="card-icon blue"><span class="material-icons">preview</span></div>
-    </div>
-    <div class="result-grid">
-      <div class="result-cell">
-        <div class="val pos" id="prevBruto">—</div>
-        <div class="lbl">Bruto Total</div>
-      </div>
-      <div class="result-cell highlight">
-        <div class="val pos" id="prevLiquido">—</div>
-        <div class="lbl">Líquido Total</div>
-      </div>
-      <div class="result-cell">
-        <div class="val" id="prevHorasVal">—</div>
-        <div class="lbl">Val. Horas Extra</div>
-      </div>
-      <div class="result-cell">
-        <div class="val neg" id="prevDescontos">—</div>
-        <div class="lbl">Total Descontos</div>
-      </div>
-    </div>
-    <button class="fab" onclick="calculate(); showTab('resultado')" title="Calcular">
-      <span class="material-icons">arrow_forward</span>
-    </button>
-  </div>
-
-</section>
-
-<!-- ═══════════════════ RESULTADO PAGE ═══════════════════ -->
-<section class="page" id="page-resultado">
-
-  <!-- Hero líquido total -->
-  <div class="card" style="background: linear-gradient(135deg, rgba(110,231,183,0.08) 0%, rgba(245,158,11,0.05) 100%); border-color: rgba(110,231,183,0.15);">
-    <div class="result-label">Salário Líquido Total</div>
-    <div class="result-big" id="resLiquido">0,00 €</div>
-    <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
-      <span class="chip green" id="resBrutoChip">Bruto: 0,00 €</span>
-      <span class="chip amber" id="resDescontosChip">Desc.: 0,00 €</span>
-    </div>
-    <div class="progress-bar" style="margin-top: 14px;">
-      <div class="progress-fill" id="progressLiquido" style="width:0%"></div>
-    </div>
-    <div style="display:flex; justify-content:space-between; margin-top:4px;">
-      <span style="font-size:10px; color:var(--text-muted)">Descontos</span>
-      <span style="font-size:10px; color:var(--text-muted)" id="progressPct">0%</span>
-    </div>
-  </div>
-
-  <!-- Horas Extra -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Horas Extra</span>
-      <div class="card-icon green"><span class="material-icons">more_time</span></div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background: var(--brand)"></div>
-        <div>
-          <div class="name">1ª Hora (dia normal)</div>
-          <div class="sub" id="bk1hDesc">2h × +25%</div>
-        </div>
-      </div>
-      <div class="amount" id="bk1hVal">0,00 €</div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background: #60a5fa"></div>
-        <div>
-          <div class="name">Restantes (dia normal)</div>
-          <div class="sub" id="bkRestDesc">6h × +37.5%</div>
-        </div>
-      </div>
-      <div class="amount" id="bkRestVal">0,00 €</div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background: var(--accent)"></div>
-        <div>
-          <div class="name">Descanso / Feriado</div>
-          <div class="sub" id="bkDescDesc">8h × +50%</div>
-        </div>
-      </div>
-      <div class="amount" id="bkDescVal">0,00 €</div>
-    </div>
-    <div class="divider-line"></div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-size:13px; font-weight:700;">Total Horas Extra (bruto)</span>
-      <span class="amount" id="bkTotalHoras" style="color:var(--brand); font-family:'DM Mono',monospace; font-size:16px;">0,00 €</span>
-    </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-      <span style="font-size:13px; color:var(--text-muted);">Total Horas Extra (líquido)</span>
-      <span class="amount" id="bkTotalHorasLiq" style="color:var(--positive); font-family:'DM Mono',monospace; font-size:14px;">0,00 €</span>
-    </div>
-  </div>
-
-  <!-- Ordenado Base -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Ordenado Base</span>
-      <div class="card-icon amber"><span class="material-icons">account_balance_wallet</span></div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:var(--text-muted)"></div>
-        <div>
-          <div class="name">Base Mensal Normal</div>
-          <div class="sub" id="bkBaseNorm"></div>
-        </div>
-      </div>
-      <div class="amount" id="bkBaseNormVal">0,00 €</div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#a78bfa"></div>
-        <div>
-          <div class="name">Base Ajustada (−20%)</div>
-          <div class="sub" id="bkBaseAjDesc"></div>
-        </div>
-      </div>
-      <div class="amount" id="bkBaseAjVal">0,00 €</div>
-    </div>
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:var(--accent)"></div>
-        <div>
-          <div class="name">Subsídio de Refeição</div>
-          <div class="sub" id="bkSubRefDesc"></div>
-        </div>
-      </div>
-      <div class="amount" id="bkSubRefVal">0,00 €</div>
-    </div>
-    <div class="divider-line"></div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-size:13px; font-weight:700;">Líquido Ordenado Base</span>
-      <span class="amount" id="bkBaseLiq" style="color:var(--brand); font-family:'DM Mono',monospace; font-size:16px;">0,00 €</span>
-    </div>
-  </div>
-
-  <!-- Descontos -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Descontos</span>
-      <div class="card-icon red"><span class="material-icons">remove_circle_outline</span></div>
-    </div>
-
-    <!-- IRS Horas Extra -->
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:var(--danger)"></div>
-        <div>
-          <div class="name">IRS (Horas Extra)</div>
-          <div class="sub" id="bkIrsHDesc"></div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkIrsHVal">0,00 €</div>
-    </div>
-
-    <!-- SS Horas Extra -->
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#f87171aa"></div>
-        <div>
-          <div class="name">Seg. Social (Horas Extra)</div>
-          <div class="sub" id="bkSsHDesc"></div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkSsHVal">0,00 €</div>
-    </div>
-
-    <!-- IRS Base -->
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#fb923c"></div>
-        <div>
-          <div class="name">IRS (Ordenado Base)</div>
-          <div class="sub" id="bkIrsBDesc"></div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkIrsBVal">0,00 €</div>
-    </div>
-
-    <!-- SS Base -->
-    <div class="breakdown-row">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#fb923caa"></div>
-        <div>
-          <div class="name">Seg. Social (Base)</div>
-          <div class="sub" id="bkSsBDesc"></div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkSsBVal">0,00 €</div>
-    </div>
-
-    <!-- ADSE -->
-    <div class="breakdown-row" id="rowAdse">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#34d399aa"></div>
-        <div>
-          <div class="name">ADSE</div>
-          <div class="sub" id="bkAdseDesc"></div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkAdseVal">0,00 €</div>
-    </div>
-
-    <!-- Câmara Clube -->
-    <div class="breakdown-row" id="rowCamaraClube">
-      <div class="left">
-        <div class="breakdown-dot" style="background:#60a5faaa"></div>
-        <div>
-          <div class="name">Câmara Clube</div>
-          <div class="sub">Desconto fixo</div>
-        </div>
-      </div>
-      <div class="amount neg" id="bkCamaraClube">0,00 €</div>
-    </div>
-
-    <div class="divider-line"></div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-size:13px; font-weight:700;">Total Descontos</span>
-      <span id="bkTotalDesc" style="color:var(--danger); font-family:'DM Mono',monospace; font-size:16px; font-weight:500;">0,00 €</span>
-    </div>
-  </div>
-
-  <!-- Salário Bruto -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Resumo Final</span>
-      <div class="card-icon green"><span class="material-icons">summarize</span></div>
-    </div>
-    <div class="result-grid">
-      <div class="result-cell">
-        <div class="val" id="resSalBruto">0,00 €</div>
-        <div class="lbl">Salário Bruto</div>
-      </div>
-      <div class="result-cell highlight">
-        <div class="val pos" id="resSalLiquidoGrid">0,00 €</div>
-        <div class="lbl">Salário Líquido</div>
-      </div>
-      <div class="result-cell">
-        <div class="val" id="resRemHoraria">0,00 €</div>
-        <div class="lbl">Rem. Horária</div>
-      </div>
-      <div class="result-cell">
-        <div class="val neg" id="resTotalDesc">0,00 €</div>
-        <div class="lbl">Total Descontos</div>
-      </div>
-    </div>
-    <div style="margin-top: 16px; overflow: hidden; border-radius: var(--radius-md);">
-      <button onclick="saveToHistory()" style="
-        display: block; width: 100%; padding: 14px;
-        background: linear-gradient(135deg, var(--brand), var(--brand-dim));
-        border: none; border-radius: var(--radius-md);
-        color: #0f1420; font-family: 'Inter', sans-serif;
-        font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
-        cursor: pointer; transition: opacity 0.2s;
-        box-sizing: border-box;
-      " onmousedown="this.style.opacity=0.8" onmouseup="this.style.opacity=1" ontouchstart="this.style.opacity=0.8" ontouchend="this.style.opacity=1">
-        💾 Guardar no Histórico
-      </button>
-    </div>
-  </div>
-
-</section>
-
-<!-- ═══════════════════ HISTÓRICO PAGE ═══════════════════ -->
-<section class="page" id="page-historico">
-  <div class="section-title">Histórico</div>
-  <div class="section-sub">Cálculos guardados localmente</div>
-  <div id="historyList">
-    <div class="empty-state">
-      <div class="emoji">📋</div>
-      <p>Sem cálculos guardados.<br>Efetue um cálculo e guarde-o.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ CONFIG PAGE ═══════════════════ -->
-<section class="page" id="page-config">
-  <div class="section-title">Configurações</div>
-  <div class="section-sub">Taxas fiscais e parâmetros</div>
-
-  <!-- Tabela IRS AT -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Tabela de Retenção na Fonte (IRS)</span>
-      <div class="card-icon amber"><span class="material-icons">account_balance</span></div>
-    </div>
-    <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px; padding:10px 12px; background:rgba(110,231,183,0.05); border-radius:var(--radius-sm); border:1px solid rgba(110,231,183,0.12); line-height:1.6;">
-      ℹ️ Tabelas AT 2026 — Continente. IRS calculado pela fórmula oficial.<br>Horas extra: <strong style="color:var(--text-primary)">50% da taxa efetiva</strong> do ordenado. SS: taxa normal em ambos.
-    </div>
-    <div class="field-group">
-      <label class="field-label">Tabela aplicável</label>
-      <select class="field-input small" id="cfgIrsTabela" onchange="saveConfig(); updateTabelaPreview()">
-        <option value="T1">I — Não casado s/ dep. / Casado 2 titulares</option>
-        <option value="T2">II — Não casado c/ dependentes</option>
-        <option value="T3">III — Casado, único titular</option>
-        <option value="T4">IV — Não casado / Casado 2 tit. s/ dep. — Deficiência</option>
-        <option value="T5">V — Não casado c/ dep. — Deficiência</option>
-        <option value="T6">VI — Casado 2 tit. c/ dep. — Deficiência</option>
-        <option value="T7">VII — Casado único titular — Deficiência</option>
-      </select>
-    </div>
-    <div class="field-group" id="fieldDependentes">
-      <label class="field-label">Nº de Dependentes</label>
-      <div class="stepper">
-        <button onclick="stepperChange('cfgDependentes', -1)">−</button>
-        <input type="number" id="cfgDependentes" value="0" min="0" max="10"
-               inputmode="numeric" onchange="saveConfig()" />
-        <button onclick="stepperChange('cfgDependentes', 1)">+</button>
-      </div>
-    </div>
-    <div id="tabelaPreview" style="margin-top:4px; padding:10px 12px; background:var(--surface-3); border-radius:var(--radius-sm); font-size:12px; color:var(--text-muted); line-height:1.8;"></div>
-  </div>
-
-  <!-- SS e ADSE -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Segurança Social e ADSE</span>
-      <div class="card-icon amber"><span class="material-icons">percent</span></div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Taxa Seg. Social (%)</label>
-      <input type="number" class="field-input small" id="cfgSsBase" value="11.00"
-             step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
-      <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Aplicada ao ordenado base e às horas extra</div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Taxa ADSE (%)</label>
-      <input type="number" class="field-input small" id="cfgAdse" value="3.50"
-             step="0.01" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-  </div>
-
-  <!-- Redução Vencimento Base -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Redução do Vencimento Base</span>
-      <div class="card-icon red"><span class="material-icons">trending_down</span></div>
-    </div>
-    <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px; padding:10px 12px; background:rgba(248,113,113,0.05); border-radius:var(--radius-sm); border:1px solid rgba(248,113,113,0.12); line-height:1.6;">
-      ⚠️ Quando ativa, a remuneração horária (base de cálculo das horas extra) é calculada sobre o vencimento <strong style="color:var(--text-primary)">após redução</strong>.
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-info">
-        <div class="t-name">Aplicar Redução</div>
-        <div class="t-sub">Afeta a remuneração horária</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="cfgReducaoActive" checked onchange="saveConfig()" />
-        <span class="slider"></span>
-      </label>
-    </div>
-    <div class="field-group" style="margin-top:14px;">
-      <label class="field-label">Percentagem de Redução (%)</label>
-      <input type="number" class="field-input small" id="cfgReducaoPct" value="20"
-             step="0.5" min="0" max="100" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-  </div>
-
-  <!-- Percentagens Extra -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Percentagens Horas Extra</span>
-      <div class="card-icon green"><span class="material-icons">tune</span></div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">1ª Hora — Dia Normal (%)</label>
-      <input type="number" class="field-input small" id="cfgP1h" value="25"
-             step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-    <div class="field-group">
-      <label class="field-label">Restantes — Dia Normal (%)</label>
-      <input type="number" class="field-input small" id="cfgPRest" value="37.5"
-             step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-    <div class="field-group">
-      <label class="field-label">Descanso / Feriado (%)</label>
-      <input type="number" class="field-input small" id="cfgPDesc" value="50"
-             step="0.5" min="0" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-  </div>
-
-  <!-- Outros descontos -->
-  <div class="card">
-    <div class="card-header">
-      <span class="card-title">Outros Descontos</span>
-      <div class="card-icon blue"><span class="material-icons">remove</span></div>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-info">
-        <div class="t-name">ADSE</div>
-        <div class="t-sub">Assistência na Doença</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="cfgAdseActive" checked onchange="saveConfig()" />
-        <span class="slider"></span>
-      </label>
-    </div>
-    <div class="toggle-row">
-      <div class="toggle-info">
-        <div class="t-name">Câmara Clube</div>
-        <div class="t-sub">Desconto fixo mensal</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" id="cfgCamaraActive" checked onchange="saveConfig()" />
-        <span class="slider"></span>
-      </label>
-    </div>
-    <div class="field-group" style="margin-top:12px;">
-      <label class="field-label">Câmara Clube (€ fixo)</label>
-      <input type="number" class="field-input small" id="cfgCamaraVal" value="1.00"
-             step="0.01" min="0" inputmode="decimal" onchange="saveConfig()" />
-    </div>
-  </div>
-
-  <!-- Cloud sync (placeholder) -->
-  <div class="card" style="opacity:0.6;">
-    <div class="card-header">
-      <span class="card-title">Sincronização Cloud</span>
-      <div class="card-icon blue"><span class="material-icons">cloud_sync</span></div>
-    </div>
-    <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">
-      Firebase Authentication + Cloud Firestore (disponível em versão futura)
-    </div>
-    <div style="display:flex; gap:8px; flex-wrap:wrap;">
-      <span class="chip amber">🔒 Em Desenvolvimento</span>
-      <span class="chip green">✓ Dados Locais Activos</span>
-    </div>
-  </div>
-
-</section>
+<!-- ═══════════════════════════════════════════════
+     GLOBAL UI: TOAST, MODAL, BOTTOM NAV
+═══════════════════════════════════════════════ -->
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
@@ -1598,10 +1250,7 @@
   </div>
 </div>
 
-<!-- Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
-<!-- Bottom Navigation -->
+<!-- Bottom Navigation (mobile) -->
 <nav class="bottom-nav">
   <button class="tab active" data-tab="calc" onclick="showTab('calc')">
     <span class="material-icons">calculate</span>
@@ -1621,12 +1270,16 @@
   </button>
 </nav>
 
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT — STATE & STORAGE
+═══════════════════════════════════════════════ -->
 <script>
-// ═══════════════════════════════════════════════════
-//  STATE & STORAGE
-// ═══════════════════════════════════════════════════
+'use strict';
+
+// ── State ──────────────────────────────────────────
 let currentResult = null;
 
+// ── Config persistence ─────────────────────────────
 function loadConfig() {
   const defaults = {
     irsTabela: 'T1', irsDependentes: 0,
@@ -1642,18 +1295,18 @@ function loadConfig() {
 
 function saveConfig() {
   const cfg = {
-    irsTabela:     document.getElementById('cfgIrsTabela').value,
-    irsDependentes:parseInt(document.getElementById('cfgDependentes').value) || 0,
-    ssBase:        parseFloat(document.getElementById('cfgSsBase').value) || 0,
-    adse:          parseFloat(document.getElementById('cfgAdse').value) || 0,
-    p1h:           parseFloat(document.getElementById('cfgP1h').value) || 25,
-    pRest:         parseFloat(document.getElementById('cfgPRest').value) || 37.5,
-    pDesc:         parseFloat(document.getElementById('cfgPDesc').value) || 50,
-    adseActive:    document.getElementById('cfgAdseActive').checked,
-    camaraActive:  document.getElementById('cfgCamaraActive').checked,
-    camaraVal:     parseFloat(document.getElementById('cfgCamaraVal').value) || 0,
-    reducaoActive: document.getElementById('cfgReducaoActive').checked,
-    reducaoPct:    parseFloat(document.getElementById('cfgReducaoPct').value) || 0
+    irsTabela:      document.getElementById('cfgIrsTabela').value,
+    irsDependentes: parseInt(document.getElementById('cfgDependentes').value) || 0,
+    ssBase:         parseFloat(document.getElementById('cfgSsBase').value) || 0,
+    adse:           parseFloat(document.getElementById('cfgAdse').value) || 0,
+    p1h:            parseFloat(document.getElementById('cfgP1h').value) || 25,
+    pRest:          parseFloat(document.getElementById('cfgPRest').value) || 37.5,
+    pDesc:          parseFloat(document.getElementById('cfgPDesc').value) || 50,
+    adseActive:     document.getElementById('cfgAdseActive').checked,
+    camaraActive:   document.getElementById('cfgCamaraActive').checked,
+    camaraVal:      parseFloat(document.getElementById('cfgCamaraVal').value) || 0,
+    reducaoActive:  document.getElementById('cfgReducaoActive').checked,
+    reducaoPct:     parseFloat(document.getElementById('cfgReducaoPct').value) || 0
   };
   localStorage.setItem('heConfig', JSON.stringify(cfg));
   autoCalc();
@@ -1661,214 +1314,136 @@ function saveConfig() {
 }
 
 function applyConfig(cfg) {
-  document.getElementById('cfgIrsTabela').value        = cfg.irsTabela;
-  document.getElementById('cfgDependentes').value      = cfg.irsDependentes;
-  document.getElementById('cfgSsBase').value           = cfg.ssBase;
-  document.getElementById('cfgAdse').value             = cfg.adse;
-  document.getElementById('cfgP1h').value              = cfg.p1h;
-  document.getElementById('cfgPRest').value            = cfg.pRest;
-  document.getElementById('cfgPDesc').value            = cfg.pDesc;
-  document.getElementById('cfgAdseActive').checked     = cfg.adseActive;
-  document.getElementById('cfgCamaraActive').checked   = cfg.camaraActive;
-  document.getElementById('cfgCamaraVal').value        = cfg.camaraVal;
-  document.getElementById('cfgReducaoActive').checked  = cfg.reducaoActive;
-  document.getElementById('cfgReducaoPct').value       = cfg.reducaoPct;
+  document.getElementById('cfgIrsTabela').value       = cfg.irsTabela;
+  document.getElementById('cfgDependentes').value     = cfg.irsDependentes;
+  document.getElementById('cfgSsBase').value          = cfg.ssBase;
+  document.getElementById('cfgAdse').value            = cfg.adse;
+  document.getElementById('cfgP1h').value             = cfg.p1h;
+  document.getElementById('cfgPRest').value           = cfg.pRest;
+  document.getElementById('cfgPDesc').value           = cfg.pDesc;
+  document.getElementById('cfgAdseActive').checked    = cfg.adseActive;
+  document.getElementById('cfgCamaraActive').checked  = cfg.camaraActive;
+  document.getElementById('cfgCamaraVal').value       = cfg.camaraVal;
+  document.getElementById('cfgReducaoActive').checked = cfg.reducaoActive;
+  document.getElementById('cfgReducaoPct').value      = cfg.reducaoPct;
   updateTabelaPreview();
 }
+</script>
 
-// ═══════════════════════════════════════════════════
-//  CALCULATION ENGINE (mirrors Excel formulas)
-// ═══════════════════════════════════════════════════
-function calculate() {
-  const cfg = loadConfig();
-
-  // Inputs
-  const salBase   = parseFloat(document.getElementById('salarioBase').value) || 0;
-  const subRef    = parseFloat(document.getElementById('subRefeicao').value) || 0;
-  const dias      = parseFloat(document.getElementById('diasTrabalho').value) || 0;
-  const h1N       = parseFloat(document.getElementById('h1Normal').value) || 0;
-  const hNR       = parseFloat(document.getElementById('hNormalRest').value) || 0;
-  const hDes      = parseFloat(document.getElementById('hDescanso').value) || 0;
-
-  // ── HORAS EXTRA ──────────────────────────────────
-  // Salário base com eventual redução (para cálculo da remuneração horária)
-  const reducaoPct    = cfg.reducaoActive ? (cfg.reducaoPct / 100) : 0;
-  const salBaseReduzido = salBase * (1 - reducaoPct);
-  // Remuneração horária = (salBaseReduzido * 12) / (52 * 28)
-  const remHoraria = (salBaseReduzido * 12) / (52 * 28);
-
-  const p1h   = cfg.p1h   / 100;
-  const pRest = cfg.pRest / 100;
-  const pDesc = cfg.pDesc / 100;
-
-  const val1hNormal  = h1N  * remHoraria * (1 + p1h);
-  const valRestNorm  = hNR  * remHoraria * (1 + pRest);
-  const valDescanso  = hDes * remHoraria * (1 + pDesc);
-
-  const totalHorasExtra = val1hNormal + valRestNorm + valDescanso;
-  const totalHoras = h1N + hNR + hDes;
-
-  // ── ORDENADO BASE ─────────────────────────────────
-  // Base ajustada = salBase * (1 - reducao%)
-  // O subsídio de refeição não é sujeito a SS nem a IRS (dentro dos limites legais)
-  // pelo que os descontos incidem apenas sobre a base ajustada.
-  const baseAjustada  = salBase * (1 - reducaoPct);
-  const subRefTotal   = subRef * dias;
-  // baseComSub inclui o subRef mas os descontos calculam-se só sobre baseAjustada
-  const baseComSub    = baseAjustada + subRefTotal;
-
-  // IRS Base — tabela AT oficial sobre baseAjustada (+ 50% horas extra como base AT)
-  const baseIrsRef = baseAjustada + totalHorasExtra * 0.5;
-  const { irsEuros: irsBaseEuros, taxaEfetiva: irsBaseTaxa } =
-    calcIrsAT(cfg.irsTabela, baseIrsRef, cfg.irsDependentes);
-
-  // IRS Horas Extra = 50% da taxa efetiva × valor bruto horas extra
-  const irsHorasTaxa  = irsBaseTaxa * 0.5;
-  const irsHoras      = totalHorasExtra * irsHorasTaxa;
-
-  // SS incide sobre base ajustada e horas extra (não sobre subsídio de refeição)
-  const ssBase   = baseAjustada * (cfg.ssBase / 100);
-  const ssHoras  = totalHorasExtra * (cfg.ssBase / 100);
-
-  // ADSE incide sobre base ajustada
-  const adseVal  = baseAjustada * (cfg.adse  / 100);
-  const camaraVal= cfg.camaraActive ? cfg.camaraVal : 0;
-
-  // Totais de descontos separados por categoria
-  const totalDescHoras = irsHoras + ssHoras;
-  const horasLiquidas  = totalHorasExtra - totalDescHoras;
-
-  const totalDescBase = irsBaseEuros + ssBase + (cfg.adseActive ? adseVal : 0) + camaraVal;
-  // Liquido do ordenado: base ajustada + subRef - descontos (subRef não sofre descontos)
-  const baseLiquida   = baseComSub - totalDescBase;
-
-  // ── TOTAIS ────────────────────────────────────────
-  const totalDescontos = totalDescHoras + totalDescBase;
-  const salarioBruto   = totalHorasExtra + baseComSub;
-  const salarioLiquido = horasLiquidas + baseLiquida;  // M11
-
-  const res = {
-    remHoraria, salBase, salBaseReduzido, reducaoPct, subRef, dias,
-    h1N, hNR, hDes, totalHoras,
-    val1hNormal, valRestNorm, valDescanso,
-    totalHorasExtra, irsHoras, irsHorasTaxa, ssHoras,
-    totalDescHoras, horasLiquidas,
-    baseAjustada, subRefTotal, baseComSub, baseIrsRef,
-    irsBase: irsBaseEuros, irsBaseTaxa, ssBase,
-    adseVal: cfg.adseActive ? adseVal : 0,
-    camaraVal,
-    totalDescBase,
-    baseLiquida,
-    totalDescontos,
-    salarioBruto,
-    salarioLiquido,
-    cfg,
-    ts: new Date().toISOString()
-  };
-
-  currentResult = res;
-  renderResult(res);
-  return res;
-}
-
-// ═══════════════════════════════════════════════════
-//  TABELAS IRS AT 2026 — CONTINENTE
-//  Fórmula: R × taxa − parcela_abater − (parcela_dep × n_deps)
-//  Linhas especiais (fórmula variável): parcela = ta × fa × (th − R)
-// ═══════════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT — IRS TABLES (AT 2026, Continente)
+═══════════════════════════════════════════════ -->
+<script>
+/**
+ * Tabelas AT 2026 — Continente.
+ * Fórmula: R × taxa − parcela − (parcela_dep × n_deps)
+ * Linhas especiais (fe != null): parcela = ta × fa × (th − R)
+ *
+ * Estrutura de cada escalonamento:
+ *   lim  — limite superior do escalão
+ *   taxa — taxa marginal
+ *   p    — parcela a abater (null se fórmula especial)
+ *   fe   — [ta, fa, th] para fórmula especial (null caso contrário)
+ */
 const IRS_TABELAS = {
   T1: { label:'I', desc:'Não casado s/ dep. / Casado 2 titulares', parcela_dep:21.43, escaloes:[
-    {lim:920,    taxa:0,      p:0,       fe:null},
-    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
-    {lim:1108,   taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
-    {lim:1154,   taxa:0.157,  p:94.71,   fe:null},
-    {lim:1212,   taxa:0.212,  p:158.18,  fe:null},
-    {lim:1819,   taxa:0.241,  p:193.33,  fe:null},
-    {lim:2119,   taxa:0.311,  p:320.66,  fe:null},
-    {lim:2499,   taxa:0.349,  p:401.19,  fe:null},
-    {lim:3305,   taxa:0.3836, p:487.66,  fe:null},
-    {lim:5547,   taxa:0.3969, p:531.62,  fe:null},
-    {lim:20221,  taxa:0.4495, p:823.40,  fe:null},
-    {lim:Infinity,taxa:0.4717,p:1272.31, fe:null},
+    {lim:920,     taxa:0,      p:0,       fe:null},
+    {lim:1042,    taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
+    {lim:1108,    taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
+    {lim:1154,    taxa:0.157,  p:94.71,   fe:null},
+    {lim:1212,    taxa:0.212,  p:158.18,  fe:null},
+    {lim:1819,    taxa:0.241,  p:193.33,  fe:null},
+    {lim:2119,    taxa:0.311,  p:320.66,  fe:null},
+    {lim:2499,    taxa:0.349,  p:401.19,  fe:null},
+    {lim:3305,    taxa:0.3836, p:487.66,  fe:null},
+    {lim:5547,    taxa:0.3969, p:531.62,  fe:null},
+    {lim:20221,   taxa:0.4495, p:823.40,  fe:null},
+    {lim:Infinity,taxa:0.4717, p:1272.31, fe:null},
   ]},
   T2: { label:'II', desc:'Não casado c/ dependentes', parcela_dep:34.29, escaloes:[
-    {lim:920,    taxa:0,      p:0,       fe:null},
-    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
-    {lim:1108,   taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
-    {lim:1154,   taxa:0.157,  p:94.71,   fe:null},
-    {lim:1212,   taxa:0.212,  p:158.18,  fe:null},
-    {lim:1819,   taxa:0.241,  p:193.33,  fe:null},
-    {lim:2119,   taxa:0.311,  p:320.66,  fe:null},
-    {lim:2499,   taxa:0.349,  p:401.19,  fe:null},
-    {lim:3305,   taxa:0.3836, p:487.66,  fe:null},
-    {lim:5547,   taxa:0.3969, p:531.62,  fe:null},
-    {lim:20221,  taxa:0.4495, p:823.40,  fe:null},
-    {lim:Infinity,taxa:0.4717,p:1272.31, fe:null},
+    {lim:920,     taxa:0,      p:0,       fe:null},
+    {lim:1042,    taxa:0.125,  p:null,    fe:[0.125,2.60,1273.85]},
+    {lim:1108,    taxa:0.157,  p:null,    fe:[0.157,1.35,1554.83]},
+    {lim:1154,    taxa:0.157,  p:94.71,   fe:null},
+    {lim:1212,    taxa:0.212,  p:158.18,  fe:null},
+    {lim:1819,    taxa:0.241,  p:193.33,  fe:null},
+    {lim:2119,    taxa:0.311,  p:320.66,  fe:null},
+    {lim:2499,    taxa:0.349,  p:401.19,  fe:null},
+    {lim:3305,    taxa:0.3836, p:487.66,  fe:null},
+    {lim:5547,    taxa:0.3969, p:531.62,  fe:null},
+    {lim:20221,   taxa:0.4495, p:823.40,  fe:null},
+    {lim:Infinity,taxa:0.4717, p:1272.31, fe:null},
   ]},
   T3: { label:'III', desc:'Casado, único titular', parcela_dep:42.86, escaloes:[
-    {lim:991,    taxa:0,      p:0,       fe:null},
-    {lim:1042,   taxa:0.125,  p:null,    fe:[0.125,2.60,1372.15]},
-    {lim:1108,   taxa:0.125,  p:null,    fe:[0.125,1.35,1677.85]},
-    {lim:1119,   taxa:0.125,  p:96.17,   fe:null},
-    {lim:1432,   taxa:0.1272, p:98.64,   fe:null},
-    {lim:1962,   taxa:0.157,  p:141.32,  fe:null},
-    {lim:2240,   taxa:0.1938, p:213.53,  fe:null},
-    {lim:2773,   taxa:0.2277, p:289.47,  fe:null},
-    {lim:3389,   taxa:0.257,  p:370.72,  fe:null},
-    {lim:5965,   taxa:0.2881, p:476.12,  fe:null},
-    {lim:20265,  taxa:0.3843, p:1049.96, fe:null},
-    {lim:Infinity,taxa:0.4717,p:2821.13, fe:null},
+    {lim:991,     taxa:0,      p:0,       fe:null},
+    {lim:1042,    taxa:0.125,  p:null,    fe:[0.125,2.60,1372.15]},
+    {lim:1108,    taxa:0.125,  p:null,    fe:[0.125,1.35,1677.85]},
+    {lim:1119,    taxa:0.125,  p:96.17,   fe:null},
+    {lim:1432,    taxa:0.1272, p:98.64,   fe:null},
+    {lim:1962,    taxa:0.157,  p:141.32,  fe:null},
+    {lim:2240,    taxa:0.1938, p:213.53,  fe:null},
+    {lim:2773,    taxa:0.2277, p:289.47,  fe:null},
+    {lim:3389,    taxa:0.257,  p:370.72,  fe:null},
+    {lim:5965,    taxa:0.2881, p:476.12,  fe:null},
+    {lim:20265,   taxa:0.3843, p:1049.96, fe:null},
+    {lim:Infinity,taxa:0.4717, p:2821.13, fe:null},
   ]},
   T4: { label:'IV', desc:'Não casado/Casado 2 tit. s/ dep. — Deficiência', parcela_dep:0, escaloes:[
-    {lim:1694,   taxa:0,      p:0,       fe:null},
-    {lim:2063,   taxa:0.212,  p:359.13,  fe:null},
-    {lim:2492,   taxa:0.311,  p:563.37,  fe:null},
-    {lim:4487,   taxa:0.349,  p:658.07,  fe:null},
-    {lim:4753,   taxa:0.3836, p:813.33,  fe:null},
-    {lim:6687,   taxa:0.3969, p:876.55,  fe:null},
-    {lim:20468,  taxa:0.4495, p:1228.29, fe:null},
-    {lim:Infinity,taxa:0.4717,p:1682.68, fe:null},
+    {lim:1694,    taxa:0,      p:0,       fe:null},
+    {lim:2063,    taxa:0.212,  p:359.13,  fe:null},
+    {lim:2492,    taxa:0.311,  p:563.37,  fe:null},
+    {lim:4487,    taxa:0.349,  p:658.07,  fe:null},
+    {lim:4753,    taxa:0.3836, p:813.33,  fe:null},
+    {lim:6687,    taxa:0.3969, p:876.55,  fe:null},
+    {lim:20468,   taxa:0.4495, p:1228.29, fe:null},
+    {lim:Infinity,taxa:0.4717, p:1682.68, fe:null},
   ]},
   T5: { label:'V', desc:'Não casado c/ dep. — Deficiência', parcela_dep:42.86, escaloes:[
-    {lim:1938,   taxa:0,      p:0,       fe:null},
-    {lim:2063,   taxa:0.2132, p:413.19,  fe:null},
-    {lim:2854,   taxa:0.311,  p:614.96,  fe:null},
-    {lim:4504,   taxa:0.349,  p:723.42,  fe:null},
-    {lim:6826,   taxa:0.3836, p:879.26,  fe:null},
-    {lim:7048,   taxa:0.3969, p:970.05,  fe:null},
-    {lim:20468,  taxa:0.4495, p:1340.78, fe:null},
-    {lim:Infinity,taxa:0.4717,p:1795.17, fe:null},
+    {lim:1938,    taxa:0,      p:0,       fe:null},
+    {lim:2063,    taxa:0.2132, p:413.19,  fe:null},
+    {lim:2854,    taxa:0.311,  p:614.96,  fe:null},
+    {lim:4504,    taxa:0.349,  p:723.42,  fe:null},
+    {lim:6826,    taxa:0.3836, p:879.26,  fe:null},
+    {lim:7048,    taxa:0.3969, p:970.05,  fe:null},
+    {lim:20468,   taxa:0.4495, p:1340.78, fe:null},
+    {lim:Infinity,taxa:0.4717, p:1795.17, fe:null},
   ]},
   T6: { label:'VI', desc:'Casado 2 tit. c/ dep. — Deficiência', parcela_dep:21.43, escaloes:[
-    {lim:1668,   taxa:0,      p:0,       fe:null},
-    {lim:2068,   taxa:0.2049, p:341.78,  fe:null},
-    {lim:2497,   taxa:0.241,  p:416.44,  fe:null},
-    {lim:3107,   taxa:0.311,  p:591.23,  fe:null},
-    {lim:4504,   taxa:0.349,  p:709.30,  fe:null},
-    {lim:6826,   taxa:0.3836, p:865.14,  fe:null},
-    {lim:7048,   taxa:0.3969, p:955.93,  fe:null},
-    {lim:20468,  taxa:0.4495, p:1326.66, fe:null},
-    {lim:Infinity,taxa:0.4717,p:1781.05, fe:null},
+    {lim:1668,    taxa:0,      p:0,       fe:null},
+    {lim:2068,    taxa:0.2049, p:341.78,  fe:null},
+    {lim:2497,    taxa:0.241,  p:416.44,  fe:null},
+    {lim:3107,    taxa:0.311,  p:591.23,  fe:null},
+    {lim:4504,    taxa:0.349,  p:709.30,  fe:null},
+    {lim:6826,    taxa:0.3836, p:865.14,  fe:null},
+    {lim:7048,    taxa:0.3969, p:955.93,  fe:null},
+    {lim:20468,   taxa:0.4495, p:1326.66, fe:null},
+    {lim:Infinity,taxa:0.4717, p:1781.05, fe:null},
   ]},
   T7: { label:'VII', desc:'Casado único titular — Deficiência', parcela_dep:42.86, escaloes:[
-    {lim:2325,   taxa:0,      p:0,       fe:null},
-    {lim:3494,   taxa:0.2277, p:529.41,  fe:null},
-    {lim:3761,   taxa:0.257,  p:631.79,  fe:null},
-    {lim:6687,   taxa:0.2881, p:748.76,  fe:null},
-    {lim:20468,  taxa:0.4244, p:1660.20, fe:null},
-    {lim:Infinity,taxa:0.4717,p:2628.34, fe:null},
+    {lim:2325,    taxa:0,      p:0,       fe:null},
+    {lim:3494,    taxa:0.2277, p:529.41,  fe:null},
+    {lim:3761,    taxa:0.257,  p:631.79,  fe:null},
+    {lim:6687,    taxa:0.2881, p:748.76,  fe:null},
+    {lim:20468,   taxa:0.4244, p:1660.20, fe:null},
+    {lim:Infinity,taxa:0.4717, p:2628.34, fe:null},
   ]},
 };
 
-// Returns { irsEuros, taxaEfetiva }
+/**
+ * Calcula a retenção IRS segundo as tabelas AT 2026.
+ * @param {string} tabelaKey — chave da tabela (T1..T7)
+ * @param {number} R         — remuneração mensal de referência (€)
+ * @param {number} nDeps     — número de dependentes
+ * @returns {{ irsEuros: number, taxaEfetiva: number }}
+ */
 function calcIrsAT(tabelaKey, R, nDeps) {
   const t = IRS_TABELAS[tabelaKey] || IRS_TABELAS['T1'];
   for (const e of t.escaloes) {
     if (R <= e.lim) {
       if (e.taxa === 0) return { irsEuros: 0, taxaEfetiva: 0 };
       const parcela = e.fe
-        ? e.fe[0] * e.fe[1] * (e.fe[2] - R)
-        : e.p;
+        ? e.fe[0] * e.fe[1] * (e.fe[2] - R)   // fórmula especial
+        : e.p;                                   // parcela fixa
       const euros = Math.max(0, R * e.taxa - parcela - (t.parcela_dep * nDeps));
       return { irsEuros: euros, taxaEfetiva: R > 0 ? euros / R : 0 };
     }
@@ -1876,6 +1451,7 @@ function calcIrsAT(tabelaKey, R, nDeps) {
   return { irsEuros: 0, taxaEfetiva: 0 };
 }
 
+/** Gera preview dos escalões da tabela IRS selecionada. */
 function updateTabelaPreview() {
   const sel = document.getElementById('cfgIrsTabela');
   if (!sel) return;
@@ -1884,7 +1460,6 @@ function updateTabelaPreview() {
   const deps = parseInt(document.getElementById('cfgDependentes').value) || 0;
   const hasDeps = ['T1','T2','T3','T5','T6','T7'].includes(sel.value);
   document.getElementById('fieldDependentes').style.display = hasDeps ? '' : 'none';
-  // Generate escalao table preview
   const rows = t.escaloes.map(e => {
     if (e.taxa === 0) return `<div>≤ ${e.lim === Infinity ? '∞' : e.lim.toLocaleString('pt-PT')}€ → <strong>0%</strong></div>`;
     const limLabel = e.lim === Infinity ? '> anterior' : `≤ ${e.lim.toLocaleString('pt-PT')}€`;
@@ -1896,78 +1471,185 @@ function updateTabelaPreview() {
   }).join(' · ');
   document.getElementById('tabelaPreview').innerHTML =
     `<div style="margin-bottom:6px; color:var(--text-primary); font-weight:600;">Tabela ${t.label} · ${t.desc}</div>` +
-    rows.slice(0,6).join('') +
+    rows.slice(0, 6).join('') +
     `<div style="margin-top:6px; color:var(--brand); font-size:11px;">Exemplos (${deps} dep.): ${sample}</div>`;
 }
+</script>
 
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT — CALCULATION ENGINE
+═══════════════════════════════════════════════ -->
+<script>
+/**
+ * Motor de cálculo principal.
+ * Replica as fórmulas da folha de Excel original.
+ * @returns {object} resultado completo com todos os valores intermédios
+ */
+function calculate() {
+  const cfg = loadConfig();
+
+  // ── Inputs ──────────────────────────────────────
+  const salBase = parseFloat(document.getElementById('salarioBase').value) || 0;
+  const subRef  = parseFloat(document.getElementById('subRefeicao').value)  || 0;
+  const dias    = parseFloat(document.getElementById('diasTrabalho').value) || 0;
+  const h1N     = parseFloat(document.getElementById('h1Normal').value)     || 0;
+  const hNR     = parseFloat(document.getElementById('hNormalRest').value)  || 0;
+  const hDes    = parseFloat(document.getElementById('hDescanso').value)    || 0;
+
+  // ── Remuneração horária ──────────────────────────
+  // Base de cálculo das horas extra é o salário após redução (se ativa)
+  const reducaoPct       = cfg.reducaoActive ? (cfg.reducaoPct / 100) : 0;
+  const salBaseReduzido  = salBase * (1 - reducaoPct);
+  // Fórmula: (base × 12) / (52 × 28)
+  const remHoraria       = (salBaseReduzido * 12) / (52 * 28);
+
+  // ── Horas extra (bruto) ──────────────────────────
+  const p1h   = cfg.p1h   / 100;
+  const pRest = cfg.pRest / 100;
+  const pDesc = cfg.pDesc / 100;
+
+  const val1hNormal = h1N  * remHoraria * (1 + p1h);
+  const valRestNorm = hNR  * remHoraria * (1 + pRest);
+  const valDescanso = hDes * remHoraria * (1 + pDesc);
+  const totalHorasExtra = val1hNormal + valRestNorm + valDescanso;
+  const totalHoras = h1N + hNR + hDes;
+
+  // ── Ordenado base ────────────────────────────────
+  // Sub. refeição isento de SS e IRS (dentro dos limites legais)
+  const baseAjustada = salBase * (1 - reducaoPct);
+  const subRefTotal  = subRef * dias;
+  const baseComSub   = baseAjustada + subRefTotal;
+
+  // ── IRS ──────────────────────────────────────────
+  // Base de referência IRS = base ajustada + 50% do valor bruto das horas extra
+  const baseIrsRef = baseAjustada + totalHorasExtra * 0.5;
+  const { irsEuros: irsBaseEuros, taxaEfetiva: irsBaseTaxa } =
+    calcIrsAT(cfg.irsTabela, baseIrsRef, cfg.irsDependentes);
+
+  // Horas extra: 50% da taxa efetiva do ordenado base
+  const irsHorasTaxa = irsBaseTaxa * 0.5;
+  const irsHoras     = totalHorasExtra * irsHorasTaxa;
+
+  // ── Segurança Social ─────────────────────────────
+  // SS incide sobre base ajustada e horas extra (não sobre sub. refeição)
+  const ssBase_  = baseAjustada  * (cfg.ssBase / 100);
+  const ssHoras  = totalHorasExtra * (cfg.ssBase / 100);
+
+  // ── ADSE e outros ────────────────────────────────
+  const adseVal   = baseAjustada * (cfg.adse / 100);
+  const camaraVal = cfg.camaraActive ? cfg.camaraVal : 0;
+
+  // ── Totais ───────────────────────────────────────
+  const totalDescHoras = irsHoras + ssHoras;
+  const horasLiquidas  = totalHorasExtra - totalDescHoras;
+
+  const totalDescBase  = irsBaseEuros + ssBase_ + (cfg.adseActive ? adseVal : 0) + camaraVal;
+  // Líquido base: sub. refeição não sofre descontos
+  const baseLiquida    = baseComSub - totalDescBase;
+
+  const totalDescontos = totalDescHoras + totalDescBase;
+  const salarioBruto   = totalHorasExtra + baseComSub;
+  const salarioLiquido = horasLiquidas + baseLiquida;
+
+  const res = {
+    // inputs
+    remHoraria, salBase, salBaseReduzido, reducaoPct, subRef, dias,
+    h1N, hNR, hDes, totalHoras,
+    // horas extra
+    val1hNormal, valRestNorm, valDescanso,
+    totalHorasExtra, irsHoras, irsHorasTaxa, ssHoras,
+    totalDescHoras, horasLiquidas,
+    // base
+    baseAjustada, subRefTotal, baseComSub, baseIrsRef,
+    irsBase: irsBaseEuros, irsBaseTaxa, ssBase: ssBase_,
+    adseVal: cfg.adseActive ? adseVal : 0,
+    camaraVal,
+    totalDescBase, baseLiquida,
+    // totais
+    totalDescontos, salarioBruto, salarioLiquido,
+    // meta
+    cfg, ts: new Date().toISOString()
+  };
+
+  currentResult = res;
+  renderResult(res);
+  return res;
+}
+
+/** Executa o cálculo e atualiza apenas o painel de pré-visualização. */
 function autoCalc() {
   const res = calculate();
-  // Update quick preview
-  document.getElementById('prevBruto').textContent    = fmt(res.salarioBruto);
-  document.getElementById('prevLiquido').textContent  = fmt(res.salarioLiquido);
-  document.getElementById('prevHorasVal').textContent = fmt(res.totalHorasExtra);
-  document.getElementById('prevDescontos').textContent= fmt(res.totalDescontos);
-  // Update hours chip
+  document.getElementById('prevBruto').textContent     = fmt(res.salarioBruto);
+  document.getElementById('prevLiquido').textContent   = fmt(res.salarioLiquido);
+  document.getElementById('prevHorasVal').textContent  = fmt(res.totalHorasExtra);
+  document.getElementById('prevDescontos').textContent = fmt(res.totalDescontos);
+
   document.getElementById('totalHorasChip').innerHTML =
     `<span class="chip green">⏱ ${res.totalHoras} horas extra</span>`;
-  // Update reduction indicator
+
   const ind = document.getElementById('reducaoIndicator');
   if (res.reducaoPct > 0) {
-    ind.innerHTML = `<span style="color:var(--danger);">↓ Redução ${(res.reducaoPct*100).toFixed(1)}% aplicada</span> · Base cálculo: <span style="font-family:'DM Mono',monospace;">${fmt(res.salBaseReduzido)}</span> · Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+    ind.innerHTML =
+      `<span style="color:var(--danger);">↓ Redução ${(res.reducaoPct*100).toFixed(1)}% aplicada</span>` +
+      ` · Base cálculo: <span style="font-family:'DM Mono',monospace;">${fmt(res.salBaseReduzido)}</span>` +
+      ` · Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
   } else {
-    ind.innerHTML = `Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+    ind.innerHTML =
+      `Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
   }
 }
 
+/** Preenche todos os elementos da página Resumo com os dados calculados. */
 function renderResult(r) {
   // Hero
-  document.getElementById('resLiquido').textContent       = fmt(r.salarioLiquido);
-  document.getElementById('resBrutoChip').textContent     = 'Bruto: ' + fmt(r.salarioBruto);
-  document.getElementById('resDescontosChip').textContent = 'Desc.: ' + fmt(r.totalDescontos);
+  document.getElementById('resLiquido').textContent        = fmt(r.salarioLiquido);
+  document.getElementById('resBrutoChip').textContent      = 'Bruto: ' + fmt(r.salarioBruto);
+  document.getElementById('resDescontosChip').textContent  = 'Desc.: ' + fmt(r.totalDescontos);
 
   // Progress bar
-  const pct = r.salarioBruto > 0 ? Math.round(r.totalDescontos / r.salarioBruto * 100) : 0;
+  const pct    = r.salarioBruto > 0 ? Math.round(r.totalDescontos / r.salarioBruto * 100) : 0;
   const liqPct = 100 - pct;
   document.getElementById('progressLiquido').style.width = liqPct + '%';
-  document.getElementById('progressPct').textContent = pct + '% descontado';
+  document.getElementById('progressPct').textContent     = pct + '% descontado';
 
   // Horas extra breakdown
-  document.getElementById('bk1hDesc').textContent   = `${r.h1N}h × +${r.cfg.p1h}%`;
+  document.getElementById('bk1hDesc').textContent    = `${r.h1N}h × +${r.cfg.p1h}%`;
   document.getElementById('bkRestDesc').textContent  = `${r.hNR}h × +${r.cfg.pRest}%`;
   document.getElementById('bkDescDesc').textContent  = `${r.hDes}h × +${r.cfg.pDesc}%`;
-  document.getElementById('bk1hVal').textContent    = fmt(r.val1hNormal);
+  document.getElementById('bk1hVal').textContent     = fmt(r.val1hNormal);
   document.getElementById('bkRestVal').textContent   = fmt(r.valRestNorm);
   document.getElementById('bkDescVal').textContent   = fmt(r.valDescanso);
-  document.getElementById('bkTotalHoras').textContent = fmt(r.totalHorasExtra);
+  document.getElementById('bkTotalHoras').textContent    = fmt(r.totalHorasExtra);
   document.getElementById('bkTotalHorasLiq').textContent = fmt(r.horasLiquidas);
 
   // Ordenado base breakdown
   document.getElementById('bkBaseNormVal').textContent = fmt(r.salBase);
+  document.getElementById('bkBaseNorm').textContent    = '';
   document.getElementById('bkBaseAjVal').textContent   = fmt(r.baseAjustada);
   document.getElementById('bkBaseAjDesc').textContent  = r.reducaoPct > 0
     ? `${fmt(r.salBase)} × ${(100 - r.reducaoPct*100).toFixed(1)}% (redução ${(r.reducaoPct*100).toFixed(1)}%)`
-    : `Sem redução aplicada`;
+    : 'Sem redução aplicada';
   document.getElementById('bkSubRefDesc').textContent  = `${r.dias} dias × ${fmt(r.subRef)}`;
   document.getElementById('bkSubRefVal').textContent   = fmt(r.subRefTotal);
   document.getElementById('bkBaseLiq').textContent     = fmt(r.baseLiquida);
 
   // Descontos
   const tabelaInfo = IRS_TABELAS[r.cfg.irsTabela] || IRS_TABELAS['T1'];
-  document.getElementById('bkIrsHDesc').textContent  =
+  document.getElementById('bkIrsHDesc').textContent =
     `Tab.${tabelaInfo.label} · ${(r.irsHorasTaxa*100).toFixed(2)}% (50% × ${(r.irsBaseTaxa*100).toFixed(2)}%)`;
-  document.getElementById('bkSsHDesc').textContent   = `${r.cfg.ssBase}% (taxa normal)`;
-  document.getElementById('bkIrsBDesc').textContent  =
+  document.getElementById('bkSsHDesc').textContent  = `${r.cfg.ssBase}% (taxa normal)`;
+  document.getElementById('bkIrsBDesc').textContent =
     `Tab.${tabelaInfo.label} · ${(r.irsBaseTaxa*100).toFixed(2)}% efetivo`;
-  document.getElementById('bkSsBDesc').textContent   = `${r.cfg.ssBase}% sobre base aj. (excl. sub. refeição)`;
-  document.getElementById('bkAdseDesc').textContent  = `${r.cfg.adse}% sobre base aj.`;
+  document.getElementById('bkSsBDesc').textContent  = `${r.cfg.ssBase}% sobre base aj. (excl. sub. refeição)`;
+  document.getElementById('bkAdseDesc').textContent = `${r.cfg.adse}% sobre base aj.`;
   document.getElementById('bkIrsHVal').textContent   = '−' + fmt(r.irsHoras);
   document.getElementById('bkSsHVal').textContent    = '−' + fmt(r.ssHoras);
   document.getElementById('bkIrsBVal').textContent   = '−' + fmt(r.irsBase);
   document.getElementById('bkSsBVal').textContent    = '−' + fmt(r.ssBase);
   document.getElementById('bkAdseVal').textContent   = '−' + fmt(r.adseVal);
   document.getElementById('bkCamaraClube').textContent = '−' + fmt(r.camaraVal);
-  document.getElementById('rowAdse').style.opacity         = r.cfg.adseActive   ? '1' : '0.4';
-  document.getElementById('rowCamaraClube').style.opacity  = r.cfg.camaraActive ? '1' : '0.4';
+  document.getElementById('rowAdse').style.opacity        = r.cfg.adseActive   ? '1' : '0.4';
+  document.getElementById('rowCamaraClube').style.opacity = r.cfg.camaraActive ? '1' : '0.4';
   document.getElementById('bkTotalDesc').textContent = '−' + fmt(r.totalDescontos);
 
   // Summary grid
@@ -1976,10 +1658,12 @@ function renderResult(r) {
   document.getElementById('resRemHoraria').textContent     = fmt(r.remHoraria);
   document.getElementById('resTotalDesc').textContent      = '−' + fmt(r.totalDescontos);
 }
+</script>
 
-// ═══════════════════════════════════════════════════
-//  HISTORY
-// ═══════════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT — HISTORY
+═══════════════════════════════════════════════ -->
+<script>
 function saveToHistory() {
   if (!currentResult) { showToast('Calcule primeiro!'); return; }
   const history = getHistory();
@@ -1995,24 +1679,29 @@ function getHistory() {
 }
 
 function renderHistory() {
-  const list = document.getElementById('historyList');
+  const list    = document.getElementById('historyList');
   const history = getHistory();
   if (!history.length) {
-    list.innerHTML = `<div class="empty-state"><div class="emoji">📋</div><p>Sem cálculos guardados.<br>Efetue um cálculo e guarde-o.</p></div>`;
+    list.innerHTML = `
+      <div class="empty-state">
+        <span class="emoji">📋</span>
+        <p>Sem cálculos guardados.<br>Efectue um cálculo e guarde-o no Resumo.</p>
+      </div>`;
     return;
   }
-  list.innerHTML = history.map(h => `
-    <div class="history-item" onclick="showHistoryDetail(${h.id})">
-      <div>
-        <div style="font-size:14px; font-weight:700;">${fmtDate(h.ts)}</div>
-        <div class="history-date">${h.totalHoras}h extra · ${fmt(h.totalHorasExtra)} bruto</div>
-      </div>
-      <div>
-        <div class="history-net">${fmt(h.salarioLiquido)}</div>
-        <div style="font-size:11px; color:var(--text-muted); text-align:right">líquido</div>
-      </div>
-    </div>
-  `).join('');
+  list.innerHTML = `<div class="history-grid">` +
+    history.map(h => `
+      <div class="history-item" onclick="showHistoryDetail(${h.id})">
+        <div>
+          <div style="font-size:14px; font-weight:700;">${fmtDate(h.ts)}</div>
+          <div class="history-date">${h.totalHoras}h extra · ${fmt(h.totalHorasExtra)} bruto</div>
+        </div>
+        <div>
+          <div class="history-net">${fmt(h.salarioLiquido)}</div>
+          <div style="font-size:11px; color:var(--text-muted); text-align:right">líquido</div>
+        </div>
+      </div>`).join('') +
+    `</div>`;
 }
 
 function showHistoryDetail(id) {
@@ -2020,42 +1709,36 @@ function showHistoryDetail(id) {
   if (!h) return;
   document.getElementById('modalTitle').textContent = fmtDate(h.ts);
   document.getElementById('modalContent').innerHTML = `
-    <div class="result-grid" style="margin-bottom:16px;">
-      <div class="result-cell highlight">
+    <div class="stat-grid" style="margin-bottom:16px;">
+      <div class="stat-cell hl">
         <div class="val pos">${fmt(h.salarioLiquido)}</div>
         <div class="lbl">Líquido Total</div>
       </div>
-      <div class="result-cell">
+      <div class="stat-cell">
         <div class="val">${fmt(h.salarioBruto)}</div>
         <div class="lbl">Bruto Total</div>
       </div>
-      <div class="result-cell">
+      <div class="stat-cell">
         <div class="val">${fmt(h.totalHorasExtra)}</div>
         <div class="lbl">Val. Horas Extra</div>
       </div>
-      <div class="result-cell">
+      <div class="stat-cell">
         <div class="val neg">−${fmt(h.totalDescontos)}</div>
         <div class="lbl">Total Descontos</div>
       </div>
     </div>
-    <div style="font-size:12px; color:var(--text-muted);">
+    <div style="font-size:12px; color:var(--text-muted); line-height:1.8;">
       ${h.h1N}h 1ª normal + ${h.hNR}h restantes + ${h.hDes}h descanso<br>
       Base: ${fmt(h.salBase)} · SS: ${h.cfg?.ssBase}% · Tabela IRS: ${h.cfg?.irsTabela || 'T1'}
     </div>
-    <button onclick="deleteHistory(${h.id})" style="
-      margin-top:16px; width:100%; padding:12px;
-      background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.2);
-      border-radius: var(--radius-md); color: var(--danger);
-      font-family: 'Inter',sans-serif; font-size:13px; font-weight:700;
-      cursor:pointer;">
+    <button class="btn-danger" onclick="deleteHistory(${h.id})">
       🗑 Eliminar registo
-    </button>
-  `;
+    </button>`;
   document.getElementById('detailModal').classList.add('open');
 }
 
 function deleteHistory(id) {
-  let history = getHistory().filter(x => x.id !== id);
+  const history = getHistory().filter(x => x.id !== id);
   localStorage.setItem('heHistory', JSON.stringify(history));
   renderHistory();
   closeModal();
@@ -2065,24 +1748,29 @@ function deleteHistory(id) {
 function closeModal() {
   document.getElementById('detailModal').classList.remove('open');
 }
+</script>
 
-// ═══════════════════════════════════════════════════
-//  UI HELPERS
-// ═══════════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT — UI HELPERS & INIT
+═══════════════════════════════════════════════ -->
+<script>
+// ── Navigation ─────────────────────────────────────
 function showTab(tab) {
-  document.querySelectorAll('.tab').forEach(t =>
+  document.querySelectorAll('.tab, .sidebar-tab').forEach(t =>
     t.classList.toggle('active', t.dataset.tab === tab));
   document.querySelectorAll('.page').forEach(p =>
     p.classList.toggle('active', p.id === 'page-' + tab));
 }
 
+// ── Stepper ────────────────────────────────────────
 function stepperChange(id, delta) {
-  const el = document.getElementById(id);
+  const el  = document.getElementById(id);
   const val = (parseFloat(el.value) || 0) + delta;
-  el.value = Math.max(0, val);
+  el.value  = Math.max(0, val);
   autoCalc();
 }
 
+// ── Formatting ─────────────────────────────────────
 function fmt(n) {
   if (typeof n !== 'number' || isNaN(n)) return '—';
   return n.toLocaleString('pt-PT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
@@ -2097,6 +1785,7 @@ function fmtDate(iso) {
   } catch { return iso; }
 }
 
+// ── Toast ──────────────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -2104,18 +1793,14 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ═══════════════════════════════════════════════════
-//  ONLINE / OFFLINE
-// ═══════════════════════════════════════════════════
+// ── Online/Offline ─────────────────────────────────
 function updateOnlineStatus() {
   document.getElementById('offlineBar').classList.toggle('show', !navigator.onLine);
 }
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
 
-// ═══════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════
+// ── Init ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   const cfg = loadConfig();
   applyConfig(cfg);
@@ -2127,9 +1812,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('SW registered'))
-      .catch(e => console.log('SW error', e));
+      .catch(e  => console.warn('SW registration failed:', e));
   }
 });
 </script>
+
 </body>
 </html>
