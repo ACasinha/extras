@@ -1,4 +1,4 @@
-// JAVASCRIPT — IRS TABLES (AT 2026, Continente) //
+/// JAVASCRIPT — IRS TABLES (AT 2026, Continente) ///
 
 /**
  * Tabelas AT 2026 — Continente.
