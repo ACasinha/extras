@@ -1,6 +1,5 @@
-<!-- ═══════════════════════════════════════════════
-     JAVASCRIPT — UI HELPERS & INIT
-═══════════════════════════════════════════════ -->
+//  JAVASCRIPT — UI HELPERS & INIT  //
+
 // ── Navigation ─────────────────────────────────────
 function showTab(tab) {
   document.querySelectorAll('.tab, .sidebar-tab').forEach(t =>
