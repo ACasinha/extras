@@ -1,9 +1,11 @@
 // Service Worker — HorasExtra CMRM
-const CACHE_NAME = 'horasextra-v1.2.3';
+const CACHE_NAME = 'horasextra-v1.1.1';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './icons',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
   'https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.css',
   'https://cdn.jsdelivr.net/npm/beercss@4.0.21/dist/cdn/beer.min.js',
   'https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.4/dist/cdn/material-dynamic-colors.min.js',
