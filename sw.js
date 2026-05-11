@@ -1,5 +1,5 @@
 // Service Worker — HorasExtra CMRM
-const CACHE_NAME = 'horasextra-v1.1.7';
+const CACHE_NAME = 'horasextra-v1.1.8';
 const STATIC_ASSETS = [
   './',
   './index.html',
