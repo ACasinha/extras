@@ -1528,12 +1528,11 @@ function calculate() {
   const baseComSub   = baseAjustada + subRefTotal;
 
   // ── IRS ──────────────────────────────────────────
-  // Base de referência IRS = base ajustada + 50% do valor bruto das horas extra
-  const baseIrsRef = baseAjustada + totalHorasExtra * 0.5;
+  // Ordenado base: taxa calculada APENAS sobre a base ajustada
   const { irsEuros: irsBaseEuros, taxaEfetiva: irsBaseTaxa } =
-    calcIrsAT(cfg.irsTabela, baseIrsRef, cfg.irsDependentes);
+  calcIrsAT(cfg.irsTabela, baseAjustada, cfg.irsDependentes);
 
-  // Horas extra: 50% da taxa efetiva do ordenado base
+  // Horas extra: 50% da taxa efetiva do ordenado base (art. 99.º-A CIRS)
   const irsHorasTaxa = irsBaseTaxa * 0.5;
   const irsHoras     = totalHorasExtra * irsHorasTaxa;
 
