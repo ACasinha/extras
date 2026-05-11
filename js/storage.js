@@ -8,12 +8,13 @@ let currentResult = null;
 // ── Config persistence ─────────────────────────────
 function loadConfig() {
   const defaults = {
+    salarioBase: 1762.31,
+    subRefeicao: 6.15,
     irsTabela: 'T1', irsDependentes: 0,
     ssBase: 11.00, adse: 3.50,
     p1h: 25, pRest: 37.5, pDesc: 50,
     adseActive: true, camaraActive: true, camaraVal: 1.00,
-    reducaoActive: true, reducaoPct: 20,
-    salarioBase: 1762.31, subRefeicao: 6.15
+    reducaoActive: true, reducaoPct: 20
   };
   try {
     return Object.assign(defaults, JSON.parse(localStorage.getItem('heConfig') || '{}'));
@@ -22,6 +23,8 @@ function loadConfig() {
 
 function saveConfig() {
   const cfg = {
+    salarioBase:    parseFloat(document.getElementById('cfgSalarioBase').value) || 0,
+    subRefeicao:    parseFloat(document.getElementById('cfgSubRefeicao').value) || 0,
     irsTabela:      document.getElementById('cfgIrsTabela').value,
     irsDependentes: parseInt(document.getElementById('cfgDependentes').value) || 0,
     ssBase:         parseFloat(document.getElementById('cfgSsBase').value) || 0,
@@ -33,16 +36,17 @@ function saveConfig() {
     camaraActive:   document.getElementById('cfgCamaraActive').checked,
     camaraVal:      parseFloat(document.getElementById('cfgCamaraVal').value) || 0,
     reducaoActive:  document.getElementById('cfgReducaoActive').checked,
-    reducaoPct:     parseFloat(document.getElementById('cfgReducaoPct').value) || 0,
-    salarioBase: parseFloat(document.getElementById('cfgSalarioBase').value) || 0,
-    subRefeicao: parseFloat(document.getElementById('cfgSubRefeicao').value) || 0,
+    reducaoPct:     parseFloat(document.getElementById('cfgReducaoPct').value) || 0
   };
   localStorage.setItem('heConfig', JSON.stringify(cfg));
+  updateCalcDisplay();
   autoCalc();
   showToast('Configurações guardadas');
 }
 
 function applyConfig(cfg) {
+  document.getElementById('cfgSalarioBase').value     = cfg.salarioBase;
+  document.getElementById('cfgSubRefeicao').value     = cfg.subRefeicao;
   document.getElementById('cfgIrsTabela').value       = cfg.irsTabela;
   document.getElementById('cfgDependentes').value     = cfg.irsDependentes;
   document.getElementById('cfgSsBase').value          = cfg.ssBase;
@@ -55,7 +59,6 @@ function applyConfig(cfg) {
   document.getElementById('cfgCamaraVal').value       = cfg.camaraVal;
   document.getElementById('cfgReducaoActive').checked = cfg.reducaoActive;
   document.getElementById('cfgReducaoPct').value      = cfg.reducaoPct;
-  document.getElementById('cfgSalarioBase').value = cfg.salarioBase;
-  document.getElementById('cfgSubRefeicao').value  = cfg.subRefeicao;
   updateTabelaPreview();
+  updateCalcDisplay();
 }
