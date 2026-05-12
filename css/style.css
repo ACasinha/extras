@@ -459,11 +459,17 @@
     .slider:before {
       content: ''; position: absolute;
       height: 18px; width: 18px; left: 3px; top: 3px;
-      border-radius: 50%; background: #fff; transition: transform 0.2s;
+      border-radius: 50%; background: #fff !important; transition: transform 0.2s;
       box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
     input:checked + .slider { background: var(--brand) !important; }
     input:checked + .slider:before { transform: translateX(20px) !important; }
+    #cfgCamaraActive:checked + .slider {
+       background: var(--blue) !important;
+    }
+    #cfgReducaoActive:checked + .slider {
+       background: var(--danger) !important;
+    }
 
   /*  COMPONENTS — PROGRESS, FAB, TOAST, MODAL */
  
