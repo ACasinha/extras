@@ -1,4 +1,6 @@
-/* REGISTO DIÁRIO — STYLES */
+/* ═══════════════════════════════════════════════
+   REGISTO DIÁRIO — STYLES
+═══════════════════════════════════════════════ */
 
 /* Month navigator */
 .month-nav {
@@ -44,6 +46,7 @@
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, transform 0.1s;
   margin-bottom: 16px;
+  box-sizing: border-box;
 }
 .btn-transfer:hover  { background: rgba(110,231,183,0.18); border-color: rgba(110,231,183,0.35); }
 .btn-transfer:active { transform: scale(0.98); }
@@ -59,7 +62,6 @@
   border-radius: var(--r-lg);
   padding: 12px 14px;
   transition: border-color 0.15s, background 0.15s;
-  position: relative;
 }
 .registo-entry:hover { border-color: var(--border-brand); background: var(--surface-3); }
 
@@ -93,7 +95,6 @@
   font-size: 16px; font-weight: 500;
   color: var(--text-primary);
 }
-.registo-nota { font-size: 13px; cursor: default; }
 .registo-nota-text {
   font-size: 11px; color: var(--text-muted);
   margin-bottom: 2px;
@@ -122,7 +123,111 @@
 .registo-btn-del  { color: var(--text-muted); }
 .registo-btn-del:hover  { background: rgba(248,113,113,0.12); color: var(--danger); }
 
-/* Registo modal specifics */
+/* ── Date field with integrated calendar button ── */
+.date-field-wrap {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.date-field-wrap:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(110,231,183,0.1);
+}
+.date-field-wrap input[type="date"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'DM Mono', monospace;
+  font-size: 16px;
+  padding: 11px 14px;
+  outline: none;
+  min-width: 0;
+  /* hide native calendar icon on webkit */
+  -webkit-appearance: none;
+}
+.date-field-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.date-cal-btn {
+  flex-shrink: 0;
+  width: 48px;
+  border: none;
+  border-left: 1px solid var(--border);
+  background: var(--surface-4);
+  color: var(--brand);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.date-cal-btn:hover  { background: rgba(110,231,183,0.12); }
+.date-cal-btn:active { background: rgba(110,231,183,0.2); }
+.date-cal-btn span.material-icons { font-size: 20px; }
+
+/* ── Time range picker ── */
+.time-range-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.time-range-sep {
+  font-size: 18px; color: var(--text-muted);
+  text-align: center; line-height: 1;
+  padding-top: 2px;
+}
+.time-field-wrap {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.time-field-wrap:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(110,231,183,0.1);
+}
+.time-field-wrap input[type="time"] {
+  flex: 1; border: none; background: transparent;
+  color: var(--text-primary);
+  font-family: 'DM Mono', monospace;
+  font-size: 16px; padding: 11px 10px;
+  outline: none; min-width: 0;
+  -webkit-appearance: none;
+}
+.time-field-wrap input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
+.time-field-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.5px; color: var(--text-muted);
+  text-transform: uppercase;
+  padding: 0 10px;
+  display: flex; align-items: center;
+  border-right: 1px solid var(--border);
+  background: var(--surface-4);
+  flex-shrink: 0;
+}
+
+/* Auto-calculated result pill */
+.time-calc-result {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-brand);
+  border-radius: var(--r-sm);
+  margin-top: 8px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.6;
+  min-height: 36px;
+}
+.time-calc-result.empty { opacity: 0.5; }
+
+/* Registo tipo info box */
 .registo-tipo-info {
   font-size: 12px; line-height: 1.6;
   padding: 8px 12px;
@@ -130,6 +235,21 @@
   border-radius: var(--r-sm);
   margin-top: 6px;
   color: var(--text-muted);
+}
+
+/* ── Modal action buttons — consistent, contained ── */
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+  padding-bottom: env(safe-area-inset-bottom, 12px);
+}
+.modal-actions .btn-primary,
+.modal-actions .btn-danger {
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* FAB on registo page */
@@ -145,6 +265,3 @@
 .fab-registo:hover  { transform: scale(1.05); box-shadow: 0 8px 28px rgba(110,231,183,0.5); }
 .fab-registo:active { transform: scale(0.93); }
 @media (min-width: 768px) { .fab-registo { bottom: 32px; right: 32px; } }
-
-/* Horas input in modal — bigger stepper */
-#regHorasWrap .stepper input { font-size: 22px; }
