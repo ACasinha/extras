@@ -580,6 +580,14 @@
     }
     .offline-bar.show { display: block; }
 
+     /* Update bar */
+    .update-bar {
+      background: var(--brand); color: #0a1020;
+      font-size: 12px; font-weight: 700;
+      padding: 8px 20px; text-align: center; display: none;
+    }
+    .update-bar.show { display: block; }
+
   /*  COMPONENTS — BUTTONS  */
   
     .btn-primary {
