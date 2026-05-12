@@ -112,7 +112,7 @@ function autoCalc() {
       `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
   } else {
     ind.innerHTML =
-      `Rem. horária: <span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+      `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
   }
 }
 
