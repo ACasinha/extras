@@ -132,6 +132,7 @@
         padding: 28px 0 24px;
         flex-shrink: 0;
         overflow-y: auto;
+        justify-content: flex-start;
       }
 
       .sidebar-logo {
