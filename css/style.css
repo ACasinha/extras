@@ -464,10 +464,10 @@
     }
     input:checked + .slider { background: var(--brand) !important; }
     input:checked + .slider:before { transform: translateX(20px) !important; }
-    #cfgCamaraActive:checked + span::before {
+    .switch > #cfgCamaraActive:checked + span::after {
        background: var(--blue) !important;
     }
-    #cfgReducaoActive:checked + span::before {
+    .switch > #cfgReducaoActive:checked + span::after {
        background: var(--danger) !important;
     }
 
