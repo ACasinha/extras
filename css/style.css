@@ -103,14 +103,14 @@
       position: relative;
     }
     .tab span.material-icons { font-size: 22px; transition: transform 0.15s; }
-    .tab.active { color: var(--brand); }
+    .tab.active { color: var(--brand) !important; }
     .tab.active span.material-icons { transform: scale(1.12); }
     .tab.active::before {
       content: '';
       position: absolute;
       top: 0; left: 25%; right: 25%;
       height: 2px;
-      background: var(--brand);
+      background: var(--brand) !important;
       border-radius: 0 0 4px 4px;
     }
     .tab:active span.material-icons { transform: scale(0.88); }
