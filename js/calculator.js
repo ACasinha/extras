@@ -108,11 +108,11 @@ function autoCalc() {
   if (res.reducaoPct > 0) {
     ind.innerHTML =
       `<label class="field-label" style="color:var(--danger) !Important;">↓ Redução ${(res.reducaoPct*100).toFixed(1)}% aplicada</label>` +
-      `<label class="field-label">Base Cálculo:</label><span style="font-family:'DM Mono',monospace;">${fmt(res.salBaseReduzido)}</span>` +
-      `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+      `<label class="field-label">Base Cálculo:</label><span style="font-family:'DM Mono',monospace; color:var(--text-primary);">${fmt(res.salBaseReduzido)}</span>` +
+      `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace; color:var(--text-primary);">${fmt(res.remHoraria)}/h</span>`;
   } else {
     ind.innerHTML =
-      `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace;">${fmt(res.remHoraria)}/h</span>`;
+      `<label class="field-label">Remuneração Horária:</label><span style="font-family:'DM Mono',monospace; color:var(--text-primary);">${fmt(res.remHoraria)}/h</span>`;
   }
 }
 
