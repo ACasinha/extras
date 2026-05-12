@@ -51,13 +51,11 @@ function showToast(msg) {
 function updateCalcDisplay() {
   const cfg = loadConfig();
 
-  // Keep hidden inputs in sync so calculator.js can read them
   const salEl = document.getElementById('salarioBase');
   const subEl = document.getElementById('subRefeicao');
   if (salEl) salEl.value = cfg.salarioBase;
   if (subEl) subEl.value = cfg.subRefeicao;
 
-  // Update the info banner on the calc page
   const bd = document.getElementById('calcBaseDisplay');
   const sd = document.getElementById('calcSubRefDisplay');
   if (bd) bd.textContent = cfg.salarioBase.toLocaleString('pt-PT', { minimumFractionDigits: 2 }) + ' €';
@@ -71,6 +69,25 @@ function updateOnlineStatus() {
 window.addEventListener('online',  updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
 
+// ── SW Update banner ───────────────────────────────
+function showUpdateBanner() {
+  const banner = document.getElementById('updateBanner');
+  if (banner) banner.classList.add('show');
+}
+
+function applyUpdate() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistration().then(reg => {
+      if (reg?.waiting) {
+        // Tell the waiting SW to skip waiting and take control
+        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+      } else {
+        location.reload();
+      }
+    });
+  }
+}
+
 // ── Init ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   const cfg = loadConfig();
@@ -80,10 +97,38 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRegisto();
   autoCalc();
 
-  // Register service worker
+  // Service Worker registration + update detection
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(() => console.log('SW registered'))
-      .catch(e  => console.warn('SW registration failed:', e));
+    navigator.serviceWorker.register('sw.js').then(reg => {
+
+      // Check for an update immediately on load
+      reg.update();
+
+      // A new SW found and is installing
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          // New SW installed and waiting — there's already a controller (not first load)
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateBanner();
+          }
+        });
+      });
+
+    }).catch(e => console.warn('SW registration failed:', e));
+
+    // When the SW sends SW_UPDATED after claiming control, reload the page
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'SW_UPDATED') location.reload();
+    });
+
+    // If the SW takes control mid-session (after SKIP_WAITING), reload
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        location.reload();
+      }
+    });
   }
 });
