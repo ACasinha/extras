@@ -99,9 +99,9 @@
               <div class="card-icon amber"><span class="material-icons">payments</span></div>
             </div>
             <div class="field-group">
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <button onclick="showTab('config')" style="background:none; border:none; color:var(--brand); font-size:11px;
+              <button onclick="showTab('config')" style="background:none; border:none; color:var(--brand); font-size:11px;
 cursor:pointer; font-weight:700; padding:0; font-family:'Inter',sans-serif;">✎ Editar</button>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
                 <label class="field-label">Ordenado Base</label>
                 <span id="calcBaseDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
               </div>
@@ -109,7 +109,9 @@ cursor:pointer; font-weight:700; padding:0; font-family:'Inter',sans-serif;">✎
                 <label class="field-label">Subsídio de Refeição Diário</label>
                 <span id="calcSubRefDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span> 
               </div>
-              <div id="reducaoIndicator" style="margin-bottom:8px; font-size:12px; color:var(--text-muted); line-height:1.6;"></div>  
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+              <div id="reducaoIndicator" style="margin-bottom:8px; font-size:12px; color:var(--text-muted); line-height:1.6;"></div>
+              </div>
             </div>
             <div class="field-group">
               <label class="field-label">Dias Trabalhados no Mês</label>
