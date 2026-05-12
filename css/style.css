@@ -132,7 +132,6 @@
         padding: 28px 0 24px;
         flex-shrink: 0;
         overflow-y: auto;
-        justify-content: flex-start;
       }
 
       .sidebar-logo {
@@ -168,6 +167,7 @@
         cursor: pointer;
         transition: background 0.15s, color 0.15s;
         text-align: left; width: 100%;
+        justify-content: flex-start;
       }
       .sidebar-tab span.material-icons { font-size: 20px; flex-shrink: 0; }
       .sidebar-tab:hover { background: var(--surface-3); color: var(--text-primary); }
