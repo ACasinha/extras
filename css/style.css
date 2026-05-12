@@ -435,7 +435,7 @@
     .chip.green { background: rgba(23, 130, 54, 1); color: var(--brand); }
     .chip.amber { background: rgba(209, 157, 0, 1);  color: var(--accent); }
     .chip.blue  { background: rgba(96,165,250,0.12);  color: var(--blue); }
-    .chip.red   { background: rgba(248,113,113,0.12); color: var(--danger); }
+    .chip.red   { background: rgba(136, 8, 8, 1); color: var(--danger); }
 
     /* Divider */
     .divider-line { height: 1px; background: var(--border); margin: 14px 0; }
