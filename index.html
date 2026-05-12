@@ -98,13 +98,15 @@
               <span class="card-title">Salário Base</span>
               <div class="card-icon amber"><span class="material-icons">payments</span></div>
             </div>
-            <div class="info-box" style="margin-bottom:14px;">
+            <div class="field-group">
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <span>
-                  Base: <span id="calcBaseDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
-                  &nbsp;·&nbsp;
-                  Sub. Ref.: <span id="calcSubRefDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
-                </span>
+                <label class="field-label">Ordenado Base</label>
+                <span id="calcBaseDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <label class="field-label">Subsídio de Refeição Diário</label>
+                <span id="calcSubRefDisplay" style="font-family:'DM Mono',monospace; color:var(--text-primary);">—</span>
+              </div>
                 <button onclick="showTab('config')"
                         style="background:none; border:none; color:var(--brand); font-size:11px;
                                cursor:pointer; font-weight:700; padding:0; font-family:'Inter',sans-serif;">
